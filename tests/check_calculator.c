@@ -7,7 +7,7 @@ START_TEST(I_plus_I_returns_II) {
 } END_TEST
 
 START_TEST(I_plus_II_returns_III) {
-    ck_assert_str_eq(add("I", "I"), "III");
+    ck_assert_str_eq(add("I", "II"), "III");
 } END_TEST
 
 Suite * calculator_suite(void) {

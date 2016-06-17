@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-Wall -std=gnu99
-LDLIBS=-pthread -lcheck_pic -lrt -lm
+LDLIBS=-pthread -lcheck_pic -lrt -lm -lbsd
 SRCDIR=src
 TESTDIR=tests
 BINDIR=bin
