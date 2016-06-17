@@ -5,7 +5,7 @@ SRCDIR=src
 TESTDIR=tests
 BINDIR=bin
 
-source=$(addprefix $(SRCDIR)/, )
+source=$(addprefix $(SRCDIR)/, calculator.c)
 tests=$(addprefix $(TESTDIR)/, check_calculator.c check_runner.c)
 
 all: clean $(BINDIR)
