@@ -24,6 +24,9 @@ int numeral_to_integer(const char * numeral) {
     for(int i = 0; i < numeral_size; ++i)
     {
         switch(numeral[i]) {
+            case 'C':
+                numeral_part_values[i] = 100;
+                break;
             case 'L':
                 numeral_part_values[i] = 50;
                 break;
