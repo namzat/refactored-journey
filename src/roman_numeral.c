@@ -17,6 +17,9 @@ const char * integer_to_numeral(int number) {
 }
 
 int numeral_to_integer(const char * numeral) {
+    if(strncmp(numeral, "L", MAX_NUMERAL_SIZE) == 0) {
+        return 50;
+    }
     if(strncmp(numeral, "X", MAX_NUMERAL_SIZE) == 0) {
         return 10;
     }
