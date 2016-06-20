@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "check_calculator.h"
+#include "calculator_should.h"
 #include "../src/calculator.h"
 
 START_TEST(I_plus_I_returns_II) {

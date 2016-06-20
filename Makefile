@@ -6,7 +6,7 @@ TESTDIR=tests
 BINDIR=bin
 
 source=$(addprefix $(SRCDIR)/, calculator.c roman_numeral.c)
-tests=$(addprefix $(TESTDIR)/, check_roman_numeral.c check_calculator.c check_runner.c)
+tests=$(addprefix $(TESTDIR)/, roman_numeral_should.c calculator_should.c check_runner.c)
 
 all: clean $(BINDIR)
 	$(CC) $(CFLAGS) $(source) $(tests) -o $(BINDIR)/check_runner $(LDLIBS)
