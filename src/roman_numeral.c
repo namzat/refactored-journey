@@ -2,11 +2,12 @@
 #include <bsd/string.h>
 #include <stdlib.h>
 
+static const int MAX_NUMERAL_SIZE = 14;
+
 const char * integer_to_numeral(int number) {
-    const int max_numeral_size = 14;
     char* numeral;
     
-    if((numeral = calloc(max_numeral_size, sizeof(char)))) {
+    if((numeral = calloc(MAX_NUMERAL_SIZE, sizeof(char)))) {
         for(int i = 0; i < number; ++i) {
             strlcat(numeral, "I", sizeof(numeral));       
         }
@@ -16,15 +17,17 @@ const char * integer_to_numeral(int number) {
 }
 
 int numeral_to_integer(const char * numeral) {
-    if(strcmp(numeral, "V") == 0) {
+    if(strncmp(numeral, "V", MAX_NUMERAL_SIZE) == 0) {
         return 5;
     }
-    else if(strcmp(numeral, "I") == 0) {
+    else if(strncmp(numeral, "I", MAX_NUMERAL_SIZE) == 0) {
             return 1;
     }
-    else if (strcmp(numeral, "II") == 0) {
+    else if (strncmp(numeral, "II", MAX_NUMERAL_SIZE) == 0) {
         return 2;
     }
     else
         return 0;
+
+        
 }
