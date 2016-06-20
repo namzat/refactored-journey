@@ -1,4 +1,5 @@
 #include "check_calculator.h"
+#include "check_roman_numeral.h"
 
 int main(void) {
     int number_failed;
@@ -6,10 +7,16 @@ int main(void) {
     SRunner *sr;
 
     s = calculator_suite();
-    sr = srunner_create(s);
 
+    sr = srunner_create(s);
     srunner_run_all(sr, CK_VERBOSE);
     number_failed = srunner_ntests_failed(sr);
+    srunner_free(sr);
+
+    s = roman_numeral_suite();
+    sr = srunner_create(s);
+    srunner_run_all(sr, CK_VERBOSE);
+    number_failed += srunner_ntests_failed(sr);
     srunner_free(sr);
 
     return(number_failed == 0) ? 0 : 1;
