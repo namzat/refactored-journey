@@ -2,11 +2,11 @@
 #include "calculator_should.h"
 #include "../src/calculator.h"
 
-START_TEST(I_plus_I_returns_II) {
+START_TEST(calculate_I_plus_I_as_II) {
     ck_assert_str_eq(add("I", "I"), "II");
 } END_TEST
 
-START_TEST(I_plus_II_returns_III) {
+START_TEST(calculate_I_plus_II_as_III) {
     ck_assert_str_eq(add("I", "II"), "III");
 } END_TEST
 
@@ -19,8 +19,8 @@ Suite * calculator_suite(void) {
     /* Core test case */
     tc_core = tcase_create("Core");
 
-    tcase_add_test(tc_core, I_plus_I_returns_II);
-    tcase_add_test(tc_core, I_plus_II_returns_III);
+    tcase_add_test(tc_core, calculate_I_plus_I_as_II);
+    tcase_add_test(tc_core, calculate_I_plus_II_as_III);
 
     suite_add_tcase(s, tc_core);
 

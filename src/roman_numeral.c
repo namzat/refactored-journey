@@ -16,7 +16,10 @@ const char * integer_to_numeral(int number) {
 }
 
 int numeral_to_integer(const char * numeral) {
-    if(strcmp(numeral, "I") == 0) {
+    if(strcmp(numeral, "V") == 0) {
+        return 5;
+    }
+    else if(strcmp(numeral, "I") == 0) {
             return 1;
     }
     else if (strcmp(numeral, "II") == 0) {
