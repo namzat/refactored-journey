@@ -1,6 +1,7 @@
 #include "roman_numeral.h"
 #include <bsd/string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 static const int MAX_NUMERAL_SIZE = 14;
 
@@ -17,30 +18,39 @@ const char * integer_to_numeral(int number) {
 }
 
 int numeral_to_integer(const char * numeral) {
-    if(strncmp(numeral, "XL", MAX_NUMERAL_SIZE) == 0) {
-        return 40;
+    const int numeral_size = strlen(numeral);
+    int numeral_part_values[numeral_size];
+
+    for(int i = 0; i < numeral_size; ++i)
+    {
+        switch(numeral[i]) {
+            case 'L':
+                numeral_part_values[i] = 50;
+                break;
+            case 'X':
+                numeral_part_values[i] = 10;
+                break;
+            case 'V': 
+                numeral_part_values[i] = 5;
+                break;
+            case 'I':
+                numeral_part_values[i] = 1;
+                break;
+            default:
+                numeral_part_values[i] = 0;
+        }
     }
-    if(strncmp(numeral, "L", MAX_NUMERAL_SIZE) == 0) {
-        return 50;
+
+    int totalvalue = 0;
+    for(int j = 0; j < numeral_size; ++j) {
+        if((j + 1 < numeral_size) && (numeral_part_values[j+1] > numeral_part_values[j])) {
+            totalvalue += numeral_part_values[j + 1] - numeral_part_values[j];
+            j++;
+        }
+        else {
+            totalvalue += numeral_part_values[j];
+        }
     }
-    if(strncmp(numeral, "X", MAX_NUMERAL_SIZE) == 0) {
-        return 10;
-    }
-    if(strncmp(numeral, "IX", MAX_NUMERAL_SIZE) == 0) {
-        return 9;
-    }
-    else if(strncmp(numeral, "IV", MAX_NUMERAL_SIZE) == 0) {
-        return 4;
-    }
-    else if(strncmp(numeral, "V", MAX_NUMERAL_SIZE) == 0) {
-        return 5;
-    }
-    else if(strncmp(numeral, "I", MAX_NUMERAL_SIZE) == 0) {
-            return 1;
-    }
-    else if (strncmp(numeral, "II", MAX_NUMERAL_SIZE) == 0) {
-        return 2;
-    }
-    else
-        return 0;       
+
+    return totalvalue;    
 }
