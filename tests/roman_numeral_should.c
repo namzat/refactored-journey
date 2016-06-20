@@ -46,6 +46,14 @@ START_TEST(convert_D_to_500) {
     ck_assert_int_eq(numeral_to_integer("D"), 500);
 } END_TEST
 
+START_TEST(convert_CD_to_400) {
+    ck_assert_int_eq(numeral_to_integer("CD"), 400);
+} END_TEST
+
+START_TEST(convert_M_to_1000) {
+    ck_assert_int_eq(numeral_to_integer("M"), 1000);
+} END_TEST
+
 Suite * roman_numeral_suite(void) {
     Suite *s;
     TCase *tc_core;
@@ -66,8 +74,8 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_C_to_100);
     tcase_add_test(tc_core, convert_XC_to_90);
     tcase_add_test(tc_core, convert_D_to_500);
-
-
+    tcase_add_test(tc_core, convert_CD_to_400);
+    tcase_add_test(tc_core, convert_M_to_1000);
 
     suite_add_tcase(s, tc_core);
 
