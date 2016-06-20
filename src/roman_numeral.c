@@ -17,7 +17,10 @@ const char * integer_to_numeral(int number) {
 }
 
 int numeral_to_integer(const char * numeral) {
-    if(strncmp(numeral, "V", MAX_NUMERAL_SIZE) == 0) {
+    if(strncmp(numeral, "IV", MAX_NUMERAL_SIZE) == 0) {
+        return 4;
+    }
+    else if(strncmp(numeral, "V", MAX_NUMERAL_SIZE) == 0) {
         return 5;
     }
     else if(strncmp(numeral, "I", MAX_NUMERAL_SIZE) == 0) {
@@ -27,7 +30,5 @@ int numeral_to_integer(const char * numeral) {
         return 2;
     }
     else
-        return 0;
-
-        
+        return 0;       
 }
