@@ -86,6 +86,10 @@ START_TEST(do_not_convert_DD_or_more_return_0) {
     ck_assert_int_eq(numeral_to_integer("DD"), 0);
 } END_TEST
 
+START_TEST(do_not_convert_MMMM_or_more_return_0) {
+    ck_assert_int_eq(numeral_to_integer("MMMM"), 0);
+} END_TEST
+
 Suite * roman_numeral_suite(void) {
     Suite *s;
     TCase *tc_core;
@@ -116,6 +120,7 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, do_not_convert_LL_or_more_return_0);
     tcase_add_test(tc_core, do_not_convert_CCCC_or_more_return_0);
     tcase_add_test(tc_core, do_not_convert_DD_or_more_return_0);
+    tcase_add_test(tc_core, do_not_convert_MMMM_or_more_return_0);
 
     suite_add_tcase(s, tc_core);
 
