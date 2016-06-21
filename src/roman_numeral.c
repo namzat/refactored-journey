@@ -22,7 +22,7 @@ int numeral_to_integer(const char * numeral) {
     int numeral_part_values[numeral_size];
 
     if((strstr(numeral, "IIII") != NULL) || (strstr(numeral, "VV") != NULL) ||
-        (strstr(numeral, "XXXX") != NULL)) {
+        (strstr(numeral, "XXXX") != NULL) || (strstr(numeral, "LL") != NULL)) {
         return 0;
     }
     
