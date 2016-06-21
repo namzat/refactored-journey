@@ -21,6 +21,10 @@ int numeral_to_integer(const char * numeral) {
     const int numeral_size = strlen(numeral);
     int numeral_part_values[numeral_size];
 
+    if(strstr(numeral, "IIII") != NULL) {
+        return 0;
+    }
+    
     for(int i = 0; i < numeral_size; ++i)
     {
         switch(numeral[i]) {
