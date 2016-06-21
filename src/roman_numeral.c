@@ -21,7 +21,8 @@ int numeral_to_integer(const char * numeral) {
     const int numeral_size = strlen(numeral);
     int numeral_part_values[numeral_size];
 
-    if((strstr(numeral, "IIII") != NULL) || (strstr(numeral, "VV") != NULL)) {
+    if((strstr(numeral, "IIII") != NULL) || (strstr(numeral, "VV") != NULL) ||
+        (strstr(numeral, "XXXX") != NULL)) {
         return 0;
     }
     
