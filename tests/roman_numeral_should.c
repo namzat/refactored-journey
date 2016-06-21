@@ -58,6 +58,10 @@ START_TEST(convert_CMXCIX_to_999) {
     ck_assert_int_eq(numeral_to_integer("CMXCIX"), 999);
 } END_TEST
 
+START_TEST(convert_XLIX_to_49) {
+    ck_assert_int_eq(numeral_to_integer("XLIX"), 49);
+} END_TEST
+
 Suite * roman_numeral_suite(void) {
     Suite *s;
     TCase *tc_core;
@@ -81,6 +85,7 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_CD_to_400);
     tcase_add_test(tc_core, convert_M_to_1000);
     tcase_add_test(tc_core, convert_CMXCIX_to_999);
+    tcase_add_test(tc_core, convert_XLIX_to_49);
 
     suite_add_tcase(s, tc_core);
 
