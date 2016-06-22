@@ -60,9 +60,9 @@ static int sum_numeral_parts(int numeral_part_values[], int array_length) {
 }
 
 int numeral_to_integer(const char * numeral) {
-    if(numeral_has_invalid_characters(numeral)) {
-        return -1;
-    }    
+    if(numeral == NULL) return -1;
+    if(strlen(numeral) == 0) return -1;
+    if(numeral_has_invalid_characters(numeral)) return -1;
     
     const int values_array_length = strlen(numeral);
     int numeral_part_values[values_array_length];

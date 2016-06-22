@@ -63,6 +63,7 @@ START_TEST(convert_XLIX_to_49) {
 } END_TEST
 
 START_TEST(reject_invalid_characters) {
+    ck_assert_int_eq(numeral_to_integer(""), -1);
     ck_assert_int_eq(numeral_to_integer("MMMM"), -1);
     ck_assert_int_eq(numeral_to_integer("IIII"), -1);
     ck_assert_int_eq(numeral_to_integer("VV"), -1);
