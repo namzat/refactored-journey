@@ -71,6 +71,9 @@ START_TEST(reject_invalid_characters) {
     ck_assert_int_eq(numeral_to_integer("CCCC"), -1);
     ck_assert_int_eq(numeral_to_integer("DD"), -1);
     ck_assert_int_eq(numeral_to_integer("MMMM"), -1);
+    ck_assert_int_eq(numeral_to_integer("1"), -1);
+    ck_assert_int_eq(numeral_to_integer("a"), -1);
+    ck_assert_int_eq(numeral_to_integer("A"), -1);
 } END_TEST
 
 Suite * roman_numeral_suite(void) {

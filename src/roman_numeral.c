@@ -18,20 +18,27 @@ const char * integer_to_numeral(int number) {
     return numeral;
 }
 
-int numeral_to_integer(const char * numeral) {
-
-    // reject invalid roman numerals
+static int numeral_has_invalid_characters(const char *numeral) {
+   // rechar_indexect invalid roman numerals
     regex_t start_state;
     const char *pattern = "[^IVXLCDM]|I{4,}|V{2,}|X{4,}|L{2,}|C{4,}|D{2,}|M{4,}";
     if (regcomp(&start_state, pattern, REG_EXTENDED)) {
         printf("regex failed");
-        return -1;
+        return 1;
     }
 
     if(regexec(&start_state, numeral, 0, NULL, 0) == 0) {
-        return -1;
+        return 1;
     }
 
+    return 0;
+}
+
+int numeral_to_integer(const char * numeral) {
+    if(numeral_has_invalid_characters(numeral)) {
+        return -1;
+    }    
+    
     const int numeral_size = strlen(numeral);
     int numeral_part_values[numeral_size];
 
@@ -64,15 +71,19 @@ int numeral_to_integer(const char * numeral) {
     }
 
     int totalvalue = 0;
-    for(int j = 0; j < numeral_size; ++j) {
-        if((j + 1 < numeral_size) && (numeral_part_values[j+1] > numeral_part_values[j])) {
-            totalvalue += numeral_part_values[j + 1] - numeral_part_values[j];
-            j++;
+    for(int char_index = 0; char_index < numeral_size; ++char_index) 
+    {
+        if((char_index + 1 < numeral_size) && (numeral_part_values[char_index+1] > numeral_part_values[char_index]))
+        {
+            totalvalue += numeral_part_values[char_index + 1] - numeral_part_values[char_index];
+            char_index++;
         }
-        else {
-            totalvalue += numeral_part_values[j];
+        else
+        {
+            totalvalue += numeral_part_values[char_index];
         }
     }
 
     return totalvalue;    
 }
+
