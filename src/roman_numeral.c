@@ -21,15 +21,18 @@ int numeral_to_integer(const char * numeral) {
     const int numeral_size = strlen(numeral);
     int numeral_part_values[numeral_size];
 
-    if((strstr(numeral, "IIII") != NULL) || (strstr(numeral, "VV") != NULL) ||
-        (strstr(numeral, "XXXX") != NULL) || (strstr(numeral, "LL") != NULL) ||
-        (strstr(numeral, "CCCC") != NULL) || (strstr(numeral, "DD") != NULL) ||
+    if( (strstr(numeral, "IIII") != NULL) || 
+        (strstr(numeral, "VV") != NULL)   ||
+        (strstr(numeral, "XXXX") != NULL) ||
+        (strstr(numeral, "LL") != NULL)   ||
+        (strstr(numeral, "CCCC") != NULL) ||
+        (strstr(numeral, "DD") != NULL)   ||
         (strstr(numeral, "MMMM") != NULL)) {
-        return 0;
+            
+            return -1;
     }
     
-    for(int i = 0; i < numeral_size; ++i)
-    {
+    for(int i = 0; i < numeral_size; ++i) {
         switch(numeral[i]) {
             case 'M':
                 numeral_part_values[i] = 1000;
@@ -53,7 +56,7 @@ int numeral_to_integer(const char * numeral) {
                 numeral_part_values[i] = 1;
                 break;
             default:
-                numeral_part_values[i] = 0;
+                return -1;
         }
     }
 

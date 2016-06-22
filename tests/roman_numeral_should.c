@@ -62,32 +62,32 @@ START_TEST(convert_XLIX_to_49) {
     ck_assert_int_eq(numeral_to_integer("XLIX"), 49);
 } END_TEST
 
-START_TEST(do_not_convert_IIII_or_more_return_0) {
-    ck_assert_int_eq(numeral_to_integer("IIII"), 0);
+START_TEST(do_not_convert_4_or_more_Is) {
+    ck_assert_int_eq(numeral_to_integer("IIII"), -1);
 } END_TEST
 
-START_TEST(do_not_convert_VV_or_more_return_0) {
-    ck_assert_int_eq(numeral_to_integer("VV"), 0);
+START_TEST(do_not_convert_2_or_more_Vs) {
+    ck_assert_int_eq(numeral_to_integer("VV"), -1);
 } END_TEST
 
-START_TEST(do_not_convert_XXXX_or_more_return_0) {
-    ck_assert_int_eq(numeral_to_integer("XXXX"), 0);
+START_TEST(do_not_convert_4_or_more_Xs) {
+    ck_assert_int_eq(numeral_to_integer("XXXX"), -1);
 } END_TEST
 
-START_TEST(do_not_convert_LL_or_more_return_0) {
-    ck_assert_int_eq(numeral_to_integer("LL"), 0);
+START_TEST(do_not_convert_2_or_more_Ls) {
+    ck_assert_int_eq(numeral_to_integer("LL"), -1);
 } END_TEST
 
-START_TEST(do_not_convert_CCCC_or_more_return_0) {
-    ck_assert_int_eq(numeral_to_integer("CCCC"), 0);
+START_TEST(do_not_convert_4_or_more_Cs) {
+    ck_assert_int_eq(numeral_to_integer("CCCC"), -1);
 } END_TEST
 
-START_TEST(do_not_convert_DD_or_more_return_0) {
-    ck_assert_int_eq(numeral_to_integer("DD"), 0);
+START_TEST(do_not_convert_2_or_more_Ds) {
+    ck_assert_int_eq(numeral_to_integer("DD"), -1);
 } END_TEST
 
-START_TEST(do_not_convert_MMMM_or_more_return_0) {
-    ck_assert_int_eq(numeral_to_integer("MMMM"), 0);
+START_TEST(do_not_convert_4_or_more_Ms) {
+    ck_assert_int_eq(numeral_to_integer("MMMM"), -1);
 } END_TEST
 
 Suite * roman_numeral_suite(void) {
@@ -114,13 +114,13 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_M_to_1000);
     tcase_add_test(tc_core, convert_CMXCIX_to_999);
     tcase_add_test(tc_core, convert_XLIX_to_49);
-    tcase_add_test(tc_core, do_not_convert_IIII_or_more_return_0);
-    tcase_add_test(tc_core, do_not_convert_VV_or_more_return_0);
-    tcase_add_test(tc_core, do_not_convert_XXXX_or_more_return_0);
-    tcase_add_test(tc_core, do_not_convert_LL_or_more_return_0);
-    tcase_add_test(tc_core, do_not_convert_CCCC_or_more_return_0);
-    tcase_add_test(tc_core, do_not_convert_DD_or_more_return_0);
-    tcase_add_test(tc_core, do_not_convert_MMMM_or_more_return_0);
+    tcase_add_test(tc_core, do_not_convert_4_or_more_Is);
+    tcase_add_test(tc_core, do_not_convert_2_or_more_Vs);
+    tcase_add_test(tc_core, do_not_convert_4_or_more_Xs);
+    tcase_add_test(tc_core, do_not_convert_2_or_more_Ls);
+    tcase_add_test(tc_core, do_not_convert_4_or_more_Cs);
+    tcase_add_test(tc_core, do_not_convert_2_or_more_Ds);
+    tcase_add_test(tc_core, do_not_convert_4_or_more_Ms);
 
     suite_add_tcase(s, tc_core);
 
