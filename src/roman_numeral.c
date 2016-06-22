@@ -2,6 +2,7 @@
 #include <bsd/string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <regex.h>
 
 static const int MAX_NUMERAL_SIZE = 14;
 
@@ -18,20 +19,22 @@ const char * integer_to_numeral(int number) {
 }
 
 int numeral_to_integer(const char * numeral) {
+
+    // reject invalid roman numerals
+    regex_t start_state;
+    const char *pattern = "[^IVXLCDM]|I{4,}|V{2,}|X{4,}|L{2,}|C{4,}|D{2,}|M{4,}";
+    if (regcomp(&start_state, pattern, REG_EXTENDED)) {
+        printf("regex failed");
+        return -1;
+    }
+
+    if(regexec(&start_state, numeral, 0, NULL, 0) == 0) {
+        return -1;
+    }
+
     const int numeral_size = strlen(numeral);
     int numeral_part_values[numeral_size];
 
-    if( (strstr(numeral, "IIII") != NULL) || 
-        (strstr(numeral, "VV") != NULL)   ||
-        (strstr(numeral, "XXXX") != NULL) ||
-        (strstr(numeral, "LL") != NULL)   ||
-        (strstr(numeral, "CCCC") != NULL) ||
-        (strstr(numeral, "DD") != NULL)   ||
-        (strstr(numeral, "MMMM") != NULL)) {
-            
-            return -1;
-    }
-    
     for(int i = 0; i < numeral_size; ++i) {
         switch(numeral[i]) {
             case 'M':
