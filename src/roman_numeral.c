@@ -34,15 +34,41 @@ static int numeral_has_invalid_characters(const char *numeral) {
     return 0;
 }
 
+static int sum_numeral_parts(int numeral_part_values[], int array_length) {
+    int totalvalue = 0;
+    int next_character_index = 0;
+    int current_character_value = 0;
+    int next_character_value = 0;
+
+    for(int char_index = 0; char_index < array_length; ++char_index) 
+    {
+        next_character_index = char_index + 1;
+        current_character_value = numeral_part_values[char_index];
+        next_character_value = numeral_part_values[next_character_index];
+
+        if((next_character_index < array_length) && (next_character_value > current_character_value))
+        {
+            totalvalue += next_character_value - current_character_value;
+            char_index++;
+        }
+        else
+        {
+            totalvalue += current_character_value;
+        }
+    }
+
+    return totalvalue; 
+}
+
 int numeral_to_integer(const char * numeral) {
     if(numeral_has_invalid_characters(numeral)) {
         return -1;
     }    
     
-    const int numeral_size = strlen(numeral);
-    int numeral_part_values[numeral_size];
+    const int values_array_length = strlen(numeral);
+    int numeral_part_values[values_array_length];
 
-    for(int i = 0; i < numeral_size; ++i) {
+    for(int i = 0; i < values_array_length; ++i) {
         switch(numeral[i]) {
             case 'M':
                 numeral_part_values[i] = 1000;
@@ -70,20 +96,7 @@ int numeral_to_integer(const char * numeral) {
         }
     }
 
-    int totalvalue = 0;
-    for(int char_index = 0; char_index < numeral_size; ++char_index) 
-    {
-        if((char_index + 1 < numeral_size) && (numeral_part_values[char_index+1] > numeral_part_values[char_index]))
-        {
-            totalvalue += numeral_part_values[char_index + 1] - numeral_part_values[char_index];
-            char_index++;
-        }
-        else
-        {
-            totalvalue += numeral_part_values[char_index];
-        }
-    }
-
-    return totalvalue;    
+    return sum_numeral_parts(numeral_part_values, values_array_length);
+   
 }
 
