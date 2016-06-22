@@ -4,18 +4,17 @@
 #include <stdio.h>
 #include <regex.h>
 
-static const int MAX_NUMERAL_SIZE = 14;
-
-const char * integer_to_numeral(int number) {
-    char* numeral;
+const int integer_to_numeral(const int number, char *numeral) {
+    if(NULL == numeral) return -1;
     
-    if((numeral = calloc(MAX_NUMERAL_SIZE, sizeof(char)))) {
-        for(int i = 0; i < number; ++i) {
-            strlcat(numeral, "I", sizeof(numeral));       
-        }
+    int multiplier = 0;
+
+    multiplier = number / ROMAN_NUMERAL_I;
+    for(int i = 0; i < multiplier; ++i) {
+        strlcat(numeral, "I", sizeof(numeral));
     }
 
-    return numeral;
+    return 0;
 }
 
 static int numeral_has_invalid_characters(const char *numeral) {
@@ -59,7 +58,7 @@ static int sum_numeral_parts(int numeral_part_values[], int array_length) {
     return totalvalue; 
 }
 
-int numeral_to_integer(const char * numeral) {
+const int numeral_to_integer(const char * numeral) {
     if(numeral == NULL) return -1;
     if(strlen(numeral) == 0) return -1;
     if(numeral_has_invalid_characters(numeral)) return -1;

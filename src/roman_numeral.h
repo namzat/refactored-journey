@@ -1,6 +1,11 @@
 #ifndef ROMAN_NUMERAL_H
 #define ROMAN_NUMERAL_H
-#endif /* ROMAN_NUMERAL_H */
 
-const char * integer_to_numeral(int number);
-int numeral_to_integer(const char * numeral);
+static const int MAX_NUMERAL_SIZE = 14;
+static const int NULL_TERMINATOR_SIZE = 1;
+static const int ROMAN_NUMERAL_I = 1;
+
+const int integer_to_numeral(const int number, char *numeral);
+const int numeral_to_integer(const char *numeral);
+
+#endif /* ROMAN_NUMERAL_H */

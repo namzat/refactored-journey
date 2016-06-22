@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "roman_numeral_should.h"
 #include "../src/roman_numeral.h"
 
@@ -77,11 +78,12 @@ START_TEST(reject_invalid_characters) {
     ck_assert_int_eq(numeral_to_integer("A"), -1);
 } END_TEST
 
+
 Suite * roman_numeral_suite(void) {
     Suite *s;
     TCase *tc_core;
 
-    s = suite_create("roman numeral");
+    s = suite_create("roman_numeral");
 
     /* Core test case */
     tc_core = tcase_create("Core");
@@ -102,7 +104,7 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_CMXCIX_to_999);
     tcase_add_test(tc_core, convert_XLIX_to_49);
     tcase_add_test(tc_core, reject_invalid_characters);
-
+    
     suite_add_tcase(s, tc_core);
 
     return s;
