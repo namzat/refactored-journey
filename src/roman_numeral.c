@@ -66,6 +66,7 @@ int numeral_to_integer(const char * numeral) {
     
     const int values_array_length = strlen(numeral);
     int numeral_part_values[values_array_length];
+    int totalValue = 0;
 
     for(int i = 0; i < values_array_length; ++i) {
         switch(numeral[i]) {
@@ -95,7 +96,8 @@ int numeral_to_integer(const char * numeral) {
         }
     }
 
-    return sum_numeral_parts(numeral_part_values, values_array_length);
-   
+    totalValue = sum_numeral_parts(numeral_part_values, values_array_length);
+
+    return totalValue;
 }
 
