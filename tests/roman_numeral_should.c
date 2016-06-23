@@ -71,19 +71,34 @@ START_TEST(convert_1000_to_M) {
 } END_TEST
 
 
-START_TEST(reject_invalid_characters) {
-    ck_assert_int_eq(numeral_to_integer(""), -1);
-    ck_assert_int_eq(numeral_to_integer("MMMM"), -1);
-    ck_assert_int_eq(numeral_to_integer("IIII"), -1);
-    ck_assert_int_eq(numeral_to_integer("VV"), -1);
-    ck_assert_int_eq(numeral_to_integer("XXXX"), -1);
-    ck_assert_int_eq(numeral_to_integer("LL"), -1);
-    ck_assert_int_eq(numeral_to_integer("CCCC"), -1);
-    ck_assert_int_eq(numeral_to_integer("DD"), -1);
-    ck_assert_int_eq(numeral_to_integer("MMMM"), -1);
-    ck_assert_int_eq(numeral_to_integer("1"), -1);
-    ck_assert_int_eq(numeral_to_integer("a"), -1);
-    ck_assert_int_eq(numeral_to_integer("A"), -1);
+START_TEST(reject_invalid_character_patterns) {
+    ck_assert_int_eq(-1,numeral_to_integer(""));
+    ck_assert_int_eq(-1,numeral_to_integer("MMMM"));
+    ck_assert_int_eq(-1,numeral_to_integer("IIII"));
+    ck_assert_int_eq(-1,numeral_to_integer("VV"));
+    ck_assert_int_eq(-1,numeral_to_integer("XXXX"));
+    ck_assert_int_eq(-1,numeral_to_integer("LL"));
+    ck_assert_int_eq(-1,numeral_to_integer("CCCC"));
+    ck_assert_int_eq(-1,numeral_to_integer("DD"));
+    ck_assert_int_eq(-1,numeral_to_integer("MMMM"));
+    ck_assert_int_eq(-1,numeral_to_integer("1"));
+    ck_assert_int_eq(-1,numeral_to_integer("a"));
+    ck_assert_int_eq(-1,numeral_to_integer("A"));
+    ck_assert_int_eq(-1,numeral_to_integer("IIIV"));
+    ck_assert_int_eq(-1,numeral_to_integer("VX"));
+    ck_assert_int_eq(-1,numeral_to_integer("VL"));
+    ck_assert_int_eq(-1,numeral_to_integer("VC"));
+    ck_assert_int_eq(-1,numeral_to_integer("VM"));
+    ck_assert_int_eq(-1,numeral_to_integer("XXL"));
+    ck_assert_int_eq(-1,numeral_to_integer("XXC"));
+    ck_assert_int_eq(-1,numeral_to_integer("XXD"));
+    ck_assert_int_eq(-1,numeral_to_integer("XXM"));
+    ck_assert_int_eq(-1,numeral_to_integer("LC"));
+    ck_assert_int_eq(-1,numeral_to_integer("LD"));
+    ck_assert_int_eq(-1,numeral_to_integer("LM"));
+    ck_assert_int_eq(-1,numeral_to_integer("CCD"));
+    ck_assert_int_eq(-1,numeral_to_integer("CCM"));
+    ck_assert_int_eq(-1,numeral_to_integer("DM"));
 } END_TEST
 
 
@@ -111,7 +126,7 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_M_to_1000);
     tcase_add_test(tc_core, convert_CMXCIX_to_999);
     tcase_add_test(tc_core, convert_XLIX_to_49);
-    tcase_add_test(tc_core, reject_invalid_characters);
+    tcase_add_test(tc_core, reject_invalid_character_patterns);
     tcase_add_test(tc_core, convert_1000_to_M);
 
     suite_add_tcase(s, tc_core);

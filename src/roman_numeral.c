@@ -27,7 +27,15 @@ const int integer_to_numeral(const int number, char *numeral) {
 static int numeral_has_invalid_characters(const char *numeral) {
     regex_t start_state;
     int returnval = 0;
-    const char *pattern = "[^IVXLCDM]|I{4,}|V{2,}|X{4,}|L{2,}|C{4,}|D{2,}|M{4,}";
+    
+    /*
+        Regex patterns used:
+        [^IVXLCDM] - disallow characters that are not the roman numerals I,V,X,L,C,D,M
+        I{4,}, V{2,}, X{4,}...etc. - disallow n or more characters in a row
+        II[VXLCDM], V[XLCDM],...etc. - disallow larger numeral after smaller for non subtract cases
+    */
+    const char *pattern = "[^IVXLCDM]|I{4,}|V{2,}|X{4,}|L{2,}|C{4,}|D{2,}|M{4,}|II[VXLCDM]|V[XLCDM]|XX[LCDM]|L[CDM]|CC[DM]|D[M]";
+    
     if (regcomp(&start_state, pattern, REG_EXTENDED)) {
         printf("regex failed");
         returnval = 1;
