@@ -16,6 +16,12 @@ const int integer_to_numeral(const int number, char *numeral) {
         remainder -= ROMAN_NUMERAL_M_VALUE;
     }
 
+    multiplier = remainder / ROMAN_NUMERAL_D_VALUE;
+    for(int i = 0; i < multiplier; ++i) {
+        strlcat(numeral, "D", sizeof(numeral));
+        remainder -= ROMAN_NUMERAL_D_VALUE;
+    }
+
     multiplier = remainder / ROMAN_NUMERAL_I_VALUE;
     for(int i = 0; i < multiplier; ++i) {
         strlcat(numeral, "I", sizeof(numeral));
