@@ -8,8 +8,15 @@ const int integer_to_numeral(const int number, char *numeral) {
     if(NULL == numeral) return -1;
     
     int multiplier = 0;
+    int remainder = number;
+    
+    multiplier = remainder / ROMAN_NUMERAL_M_VALUE;
+    for(int i = 0; i < multiplier; ++i) {
+        strlcat(numeral, "M", sizeof(numeral));
+        remainder -= ROMAN_NUMERAL_M_VALUE;
+    }
 
-    multiplier = number / ROMAN_NUMERAL_I;
+    multiplier = remainder / ROMAN_NUMERAL_I_VALUE;
     for(int i = 0; i < multiplier; ++i) {
         strlcat(numeral, "I", sizeof(numeral));
     }
