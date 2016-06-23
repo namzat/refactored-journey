@@ -3,6 +3,14 @@
 #include "roman_numeral_should.h"
 #include "../src/roman_numeral.h"
 
+const void assert_int_to_roman_conversion(const int integer, const char *expected_numeral) {
+    char *result = calloc(strlen(expected_numeral) ,sizeof(char));
+    int status = integer_to_numeral(integer, result);
+    ck_assert_int_eq(0, status);
+    ck_assert_str_eq(expected_numeral, result);
+    free(result);
+}
+
 START_TEST(convert_I_to_1) {
     ck_assert_int_eq(numeral_to_integer("I"), 1);
 } END_TEST
@@ -64,12 +72,8 @@ START_TEST(convert_XLIX_to_49) {
 } END_TEST
 
 START_TEST(convert_1000_to_M) {
-    char *result = calloc(2,sizeof(char));
-    int status = integer_to_numeral(1000, result);
-    ck_assert_int_eq(0, status);
-    ck_assert_str_eq("M", result);
+    assert_int_to_roman_conversion(1000, "M");
 } END_TEST
-
 
 START_TEST(reject_invalid_character_patterns) {
     ck_assert_int_eq(-1,numeral_to_integer(""));
