@@ -39,6 +39,14 @@ START_TEST(convert_X_to_10) {
     ck_assert_int_eq(numeral_to_integer("X"), 10);
 } END_TEST
 
+START_TEST(convert_XX_to_20) {
+    ck_assert_int_eq(numeral_to_integer("XX"), 20);
+} END_TEST
+
+START_TEST(convert_XXX_to_30) {
+    ck_assert_int_eq(numeral_to_integer("XXX"), 30);
+} END_TEST
+
 START_TEST(convert_L_to_50) {
     ck_assert_int_eq(numeral_to_integer("L"), 50);
 } END_TEST
@@ -105,6 +113,14 @@ START_TEST(convert_50_to_L) {
 
 START_TEST(convert_40_to_XL) {
     assert_int_to_roman_conversion(40, "XL");
+} END_TEST
+
+START_TEST(convert_30_to_XXX) {
+    assert_int_to_roman_conversion(30, "XXX");
+} END_TEST
+
+START_TEST(convert_20_to_XX) {
+    assert_int_to_roman_conversion(20, "XX");
 } END_TEST
 
 START_TEST(convert_10_to_X) {
@@ -182,6 +198,8 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_IV_to_4);
     tcase_add_test(tc_core, convert_IX_to_9);
     tcase_add_test(tc_core, convert_X_to_10);
+    tcase_add_test(tc_core, convert_XX_to_20);
+    tcase_add_test(tc_core, convert_XXX_to_30);
     tcase_add_test(tc_core, convert_L_to_50);
     tcase_add_test(tc_core, convert_XL_to_40);
     tcase_add_test(tc_core, convert_C_to_100);
@@ -200,6 +218,8 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_90_to_XC);
     tcase_add_test(tc_core, convert_50_to_L);
     tcase_add_test(tc_core, convert_40_to_XL);
+    tcase_add_test(tc_core, convert_30_to_XXX);
+    tcase_add_test(tc_core, convert_20_to_XX);
     tcase_add_test(tc_core, convert_10_to_X);
     tcase_add_test(tc_core, convert_9_to_IX);
     tcase_add_test(tc_core, convert_5_to_V);
