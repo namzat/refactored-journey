@@ -115,6 +115,10 @@ START_TEST(convert_5_to_V) {
     assert_int_to_roman_conversion(5, "V");
 } END_TEST
 
+START_TEST(convert_4_to_IV) {
+    assert_int_to_roman_conversion(4, "IV");
+} END_TEST
+
 START_TEST(convert_1_to_I) {
     assert_int_to_roman_conversion(1, "I");
 } END_TEST
@@ -186,6 +190,7 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_10_to_X);
     tcase_add_test(tc_core, convert_9_to_IX);
     tcase_add_test(tc_core, convert_5_to_V);
+    tcase_add_test(tc_core, convert_4_to_IV);
     tcase_add_test(tc_core, convert_1_to_I);
     
 

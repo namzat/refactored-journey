@@ -20,6 +20,7 @@ static const roman_numeral_t ROMAN_NUMERAL_XL = { "XL", 40};
 static const roman_numeral_t ROMAN_NUMERAL_X = { "X", 10};
 static const roman_numeral_t ROMAN_NUMERAL_IX = { "IX", 9};
 static const roman_numeral_t ROMAN_NUMERAL_V = { "V", 5};
+static const roman_numeral_t ROMAN_NUMERAL_IV = { "IV", 4};
 static const roman_numeral_t ROMAN_NUMERAL_I = { "I", 1};
 
 const int integer_to_numeral(const int number, char *numeral);
