@@ -10,6 +10,7 @@ static const int MAX_NUMERAL_SIZE = 14;
 static const int NULL_TERMINATOR_SIZE = 1;
 
 static const roman_numeral_t ROMAN_NUMERAL_M = { "M", 1000};
+static const roman_numeral_t ROMAN_NUMERAL_CM = { "CM", 900};
 static const roman_numeral_t ROMAN_NUMERAL_D = { "D", 500};
 static const roman_numeral_t ROMAN_NUMERAL_C = { "C", 100};
 static const roman_numeral_t ROMAN_NUMERAL_L = { "L", 50};

@@ -75,6 +75,10 @@ START_TEST(convert_1000_to_M) {
     assert_int_to_roman_conversion(1000, "M");
 } END_TEST
 
+START_TEST(convert_900_to_CM) {
+    assert_int_to_roman_conversion(900, "CM");
+} END_TEST
+
 START_TEST(convert_500_to_D) {
     assert_int_to_roman_conversion(500, "D");
 } END_TEST
@@ -156,12 +160,14 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_XLIX_to_49);
     tcase_add_test(tc_core, reject_invalid_character_patterns);
     tcase_add_test(tc_core, convert_1000_to_M);
+    tcase_add_test(tc_core, convert_900_to_CM);
     tcase_add_test(tc_core, convert_500_to_D);
     tcase_add_test(tc_core, convert_100_to_C);
     tcase_add_test(tc_core, convert_50_to_L);
     tcase_add_test(tc_core, convert_10_to_X);
     tcase_add_test(tc_core, convert_5_to_V);
     tcase_add_test(tc_core, convert_1_to_I);
+    
 
     suite_add_tcase(s, tc_core);
 

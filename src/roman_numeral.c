@@ -22,9 +22,11 @@ static const int extract_roman_numeral(const int initial_value, roman_numeral_t 
 const int integer_to_numeral(const int number, char *numeral) {
     if(NULL == numeral) return -1;
 
-    int remainder = number;
+    int remainder = 0;
     
     remainder = extract_roman_numeral(number, ROMAN_NUMERAL_M, numeral);
+
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_CM, numeral);
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_D, numeral);
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_C, numeral);
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_L, numeral);
