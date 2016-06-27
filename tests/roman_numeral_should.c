@@ -59,6 +59,14 @@ START_TEST(convert_C_to_100) {
     ck_assert_int_eq(numeral_to_integer("C"), 100);
 } END_TEST
 
+START_TEST(convert_CC_to_200) {
+    ck_assert_int_eq(numeral_to_integer("CC"), 200);
+} END_TEST
+
+START_TEST(convert_CCC_to_300) {
+    ck_assert_int_eq(numeral_to_integer("CCC"), 300);
+} END_TEST
+
 START_TEST(convert_XC_to_90) {
     ck_assert_int_eq(numeral_to_integer("XC"), 90);
 } END_TEST
@@ -97,6 +105,14 @@ START_TEST(convert_500_to_D) {
 
 START_TEST(convert_400_to_CD) {
     assert_int_to_roman_conversion(400, "CD");
+} END_TEST
+
+START_TEST(convert_300_to_CCC) {
+    assert_int_to_roman_conversion(300, "CCC");
+} END_TEST
+
+START_TEST(convert_200_to_CC) {
+    assert_int_to_roman_conversion(200, "CC");
 } END_TEST
 
 START_TEST(convert_100_to_C) {
@@ -203,6 +219,8 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_L_to_50);
     tcase_add_test(tc_core, convert_XL_to_40);
     tcase_add_test(tc_core, convert_C_to_100);
+    tcase_add_test(tc_core, convert_CC_to_200);
+    tcase_add_test(tc_core, convert_CCC_to_300);
     tcase_add_test(tc_core, convert_XC_to_90);
     tcase_add_test(tc_core, convert_D_to_500);
     tcase_add_test(tc_core, convert_CD_to_400);
@@ -214,6 +232,8 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_900_to_CM);
     tcase_add_test(tc_core, convert_500_to_D);
     tcase_add_test(tc_core, convert_400_to_CD);
+    tcase_add_test(tc_core, convert_300_to_CCC);
+    tcase_add_test(tc_core, convert_200_to_CC);
     tcase_add_test(tc_core, convert_100_to_C);
     tcase_add_test(tc_core, convert_90_to_XC);
     tcase_add_test(tc_core, convert_50_to_L);
