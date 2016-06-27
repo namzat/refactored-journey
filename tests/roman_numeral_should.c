@@ -83,12 +83,28 @@ START_TEST(convert_M_to_1000) {
     ck_assert_int_eq(numeral_to_integer("M"), 1000);
 } END_TEST
 
+START_TEST(convert_MM_to_2000) {
+    ck_assert_int_eq(numeral_to_integer("MM"), 2000);
+} END_TEST
+
+START_TEST(convert_MMM_to_3000) {
+    ck_assert_int_eq(numeral_to_integer("MMM"), 3000);
+} END_TEST
+
 START_TEST(convert_CMXCIX_to_999) {
     ck_assert_int_eq(numeral_to_integer("CMXCIX"), 999);
 } END_TEST
 
 START_TEST(convert_XLIX_to_49) {
     ck_assert_int_eq(numeral_to_integer("XLIX"), 49);
+} END_TEST
+
+START_TEST(convert_3000_to_MMM) {
+    assert_int_to_roman_conversion(3000, "MMM");
+} END_TEST
+
+START_TEST(convert_2000_to_MM) {
+    assert_int_to_roman_conversion(2000, "MM");
 } END_TEST
 
 START_TEST(convert_1000_to_M) {
@@ -225,9 +241,13 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_D_to_500);
     tcase_add_test(tc_core, convert_CD_to_400);
     tcase_add_test(tc_core, convert_M_to_1000);
+    tcase_add_test(tc_core, convert_MM_to_2000);
+    tcase_add_test(tc_core, convert_MMM_to_3000);
     tcase_add_test(tc_core, convert_CMXCIX_to_999);
     tcase_add_test(tc_core, convert_XLIX_to_49);
     tcase_add_test(tc_core, reject_invalid_character_patterns);
+    tcase_add_test(tc_core, convert_3000_to_MMM);
+    tcase_add_test(tc_core, convert_2000_to_MM);
     tcase_add_test(tc_core, convert_1000_to_M);
     tcase_add_test(tc_core, convert_900_to_CM);
     tcase_add_test(tc_core, convert_500_to_D);
