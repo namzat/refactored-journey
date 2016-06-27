@@ -13,7 +13,7 @@ const char * add(const char *operand1, const char *operand2) {
 
     operand1value = numeral_to_integer(operand1);
     operand2value = numeral_to_integer(operand2);
-
+        
     total = operand1value + operand2value;
 
     int status = integer_to_numeral(total, numeraltotal);  

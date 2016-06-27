@@ -4,6 +4,25 @@
 #include <stdio.h>
 #include <regex.h>
 
+typedef struct {
+    const char character[2];
+    const int value;
+} roman_numeral_t;
+
+static const roman_numeral_t ROMAN_NUMERAL_M = { "M", 1000};
+static const roman_numeral_t ROMAN_NUMERAL_CM = { "CM", 900};
+static const roman_numeral_t ROMAN_NUMERAL_D = { "D", 500};
+static const roman_numeral_t ROMAN_NUMERAL_CD = { "CD", 400};
+static const roman_numeral_t ROMAN_NUMERAL_C = { "C", 100};
+static const roman_numeral_t ROMAN_NUMERAL_XC = { "XC", 90};
+static const roman_numeral_t ROMAN_NUMERAL_L = { "L", 50};
+static const roman_numeral_t ROMAN_NUMERAL_XL = { "XL", 40};
+static const roman_numeral_t ROMAN_NUMERAL_X = { "X", 10};
+static const roman_numeral_t ROMAN_NUMERAL_IX = { "IX", 9};
+static const roman_numeral_t ROMAN_NUMERAL_V = { "V", 5};
+static const roman_numeral_t ROMAN_NUMERAL_IV = { "IV", 4};
+static const roman_numeral_t ROMAN_NUMERAL_I = { "I", 1};
+
 static const int extract_roman_numeral(const int initial_value, roman_numeral_t conversion_numeral, char* resultant_numeral) {
     int remainder = initial_value;
     int multiplier = 0;
@@ -43,7 +62,7 @@ const int integer_to_numeral(const int number, char *numeral) {
 }
 
 static int numeral_has_invalid_characters(const char *numeral) {
-    regex_t start_state;
+    regex_t regex;
     int returnval = 0;
     
     /*
@@ -54,32 +73,32 @@ static int numeral_has_invalid_characters(const char *numeral) {
     */
     const char *pattern = "[^IVXLCDM]|I{4,}|V{2,}|X{4,}|L{2,}|C{4,}|D{2,}|M{4,}|II[VXLCDM]|V[XLCDM]|XX[LCDM]|L[CDM]|CC[DM]|D[M]";
     
-    if (regcomp(&start_state, pattern, REG_EXTENDED)) {
+    if (regcomp(&regex, pattern, REG_EXTENDED)) { // make sure regex compilation worked
         printf("regex failed");
         returnval = 1;
     }
-    else if(regexec(&start_state, numeral, 0, NULL, 0) == 0) {
+    else if(regexec(&regex, numeral, 0, NULL, 0) == 0) { // look for a match
         returnval = 1;
     }
 
-    regfree(&start_state);
+    regfree(&regex);
 
     return returnval;
 }
 
-static int sum_numeral_parts(int numeral_part_values[], int array_length) {
+static int sum_numeral_parts(int numeral_part_values[], int numeral_part_values_array_length) {
     int totalvalue = 0;
     int next_character_index = 0;
     int current_character_value = 0;
     int next_character_value = 0;
 
-    for(int char_index = 0; char_index < array_length; ++char_index) 
+    for(int char_index = 0; char_index < numeral_part_values_array_length; ++char_index) 
     {
         next_character_index = char_index + 1;
         current_character_value = numeral_part_values[char_index];
         next_character_value = numeral_part_values[next_character_index];
 
-        if((next_character_index < array_length) && (next_character_value > current_character_value))
+        if((next_character_index < numeral_part_values_array_length) && (next_character_value > current_character_value))
         {
             totalvalue += next_character_value - current_character_value;
             char_index++;
@@ -94,11 +113,12 @@ static int sum_numeral_parts(int numeral_part_values[], int array_length) {
 }
 
 const int numeral_to_integer(const char * numeral) {
-    if(numeral == NULL) return -1;
-    if(strlen(numeral) == 0) return -1;
+    const int values_array_length = strlen(numeral);
+
+    if(NULL == numeral) return -1;
+    if(0 == values_array_length) return -1;
     if(numeral_has_invalid_characters(numeral)) return -1;
     
-    const int values_array_length = strlen(numeral);
     int numeral_part_values[values_array_length];
     int totalValue = 0;
 
