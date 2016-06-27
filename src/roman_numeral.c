@@ -4,8 +4,10 @@
 #include <stdio.h>
 #include <regex.h>
 
+#define MAX_COMPARE_ROMAN_NUMERAL_SIZE 2
+
 typedef struct {
-    const char character[2];
+    const char character[MAX_COMPARE_ROMAN_NUMERAL_SIZE];
     const int value;
 } roman_numeral_t;
 
