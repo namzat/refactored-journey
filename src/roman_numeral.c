@@ -26,6 +26,7 @@ const int integer_to_numeral(const int number, char *numeral) {
     
     remainder = extract_roman_numeral(number, ROMAN_NUMERAL_M, numeral);
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_D, numeral);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_C, numeral);
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_I, numeral);
 
     return remainder;
