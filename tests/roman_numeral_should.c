@@ -19,6 +19,10 @@ START_TEST(convert_II_to_2) {
     ck_assert_int_eq(numeral_to_integer("II"), 2);
 } END_TEST
 
+START_TEST(convert_III_to_3) {
+    ck_assert_int_eq(numeral_to_integer("III"), 3);
+} END_TEST
+
 START_TEST(convert_V_to_5) {
     ck_assert_int_eq(numeral_to_integer("V"), 5);
 } END_TEST
@@ -119,6 +123,10 @@ START_TEST(convert_4_to_IV) {
     assert_int_to_roman_conversion(4, "IV");
 } END_TEST
 
+START_TEST(convert_3_to_III) {
+    assert_int_to_roman_conversion(3, "III");
+} END_TEST
+
 START_TEST(convert_1_to_I) {
     assert_int_to_roman_conversion(1, "I");
 } END_TEST
@@ -165,6 +173,7 @@ Suite * roman_numeral_suite(void) {
 
     tcase_add_test(tc_core, convert_I_to_1);
     tcase_add_test(tc_core, convert_II_to_2);
+    tcase_add_test(tc_core, convert_III_to_3);
     tcase_add_test(tc_core, convert_V_to_5);
     tcase_add_test(tc_core, convert_IV_to_4);
     tcase_add_test(tc_core, convert_IX_to_9);
@@ -191,6 +200,7 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_9_to_IX);
     tcase_add_test(tc_core, convert_5_to_V);
     tcase_add_test(tc_core, convert_4_to_IV);
+    tcase_add_test(tc_core, convert_3_to_III);
     tcase_add_test(tc_core, convert_1_to_I);
     
 
