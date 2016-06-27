@@ -3,7 +3,7 @@
 #include "roman_numeral_should.h"
 #include "../src/roman_numeral.h"
 
-const void assert_int_to_roman_conversion(const int integer, const char *expected_numeral) {
+void assert_int_to_roman_conversion(const int integer, const char *expected_numeral) {
     char *result = calloc(strlen(expected_numeral) ,sizeof(char));
     int status = integer_to_numeral(integer, result);
     ck_assert_int_eq(0, status);
@@ -78,6 +78,7 @@ START_TEST(convert_1000_to_M) {
 START_TEST(convert_500_to_D) {
     assert_int_to_roman_conversion(500, "D");
 } END_TEST
+
 
 START_TEST(reject_invalid_character_patterns) {
     ck_assert_int_eq(-1,numeral_to_integer(""));

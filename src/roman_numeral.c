@@ -4,30 +4,31 @@
 #include <stdio.h>
 #include <regex.h>
 
+static const int extract_roman_numeral(const int initial_value, roman_numeral_t conversion_numeral, char* resultant_numeral) {
+    int remainder = initial_value;
+    int multiplier = 0;
+
+    if(NULL == resultant_numeral) return -1;
+
+    multiplier = remainder / conversion_numeral.value;
+    for(int i = 0; i < multiplier; ++i) {
+        strlcat(resultant_numeral,conversion_numeral.character, sizeof(resultant_numeral));
+        remainder -= conversion_numeral.value;
+    }
+
+    return remainder;
+}
+
 const int integer_to_numeral(const int number, char *numeral) {
     if(NULL == numeral) return -1;
-    
-    int multiplier = 0;
+
     int remainder = number;
     
-    multiplier = remainder / ROMAN_NUMERAL_M_VALUE;
-    for(int i = 0; i < multiplier; ++i) {
-        strlcat(numeral, "M", sizeof(numeral));
-        remainder -= ROMAN_NUMERAL_M_VALUE;
-    }
+    remainder = extract_roman_numeral(number, ROMAN_NUMERAL_M, numeral);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_D, numeral);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_I, numeral);
 
-    multiplier = remainder / ROMAN_NUMERAL_D_VALUE;
-    for(int i = 0; i < multiplier; ++i) {
-        strlcat(numeral, "D", sizeof(numeral));
-        remainder -= ROMAN_NUMERAL_D_VALUE;
-    }
-
-    multiplier = remainder / ROMAN_NUMERAL_I_VALUE;
-    for(int i = 0; i < multiplier; ++i) {
-        strlcat(numeral, "I", sizeof(numeral));
-    }
-
-    return 0;
+    return remainder;
 }
 
 static int numeral_has_invalid_characters(const char *numeral) {
