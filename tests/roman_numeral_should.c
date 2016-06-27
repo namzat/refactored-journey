@@ -99,8 +99,16 @@ START_TEST(convert_50_to_L) {
     assert_int_to_roman_conversion(50, "L");
 } END_TEST
 
+START_TEST(convert_40_to_XL) {
+    assert_int_to_roman_conversion(40, "XL");
+} END_TEST
+
 START_TEST(convert_10_to_X) {
     assert_int_to_roman_conversion(10, "X");
+} END_TEST
+
+START_TEST(convert_9_to_IX) {
+    assert_int_to_roman_conversion(9, "IX");
 } END_TEST
 
 START_TEST(convert_5_to_V) {
@@ -174,7 +182,9 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_100_to_C);
     tcase_add_test(tc_core, convert_90_to_XC);
     tcase_add_test(tc_core, convert_50_to_L);
+    tcase_add_test(tc_core, convert_40_to_XL);
     tcase_add_test(tc_core, convert_10_to_X);
+    tcase_add_test(tc_core, convert_9_to_IX);
     tcase_add_test(tc_core, convert_5_to_V);
     tcase_add_test(tc_core, convert_1_to_I);
     

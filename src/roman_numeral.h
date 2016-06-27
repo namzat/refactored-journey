@@ -16,7 +16,9 @@ static const roman_numeral_t ROMAN_NUMERAL_CD = { "CD", 400};
 static const roman_numeral_t ROMAN_NUMERAL_C = { "C", 100};
 static const roman_numeral_t ROMAN_NUMERAL_XC = { "XC", 90};
 static const roman_numeral_t ROMAN_NUMERAL_L = { "L", 50};
+static const roman_numeral_t ROMAN_NUMERAL_XL = { "XL", 40};
 static const roman_numeral_t ROMAN_NUMERAL_X = { "X", 10};
+static const roman_numeral_t ROMAN_NUMERAL_IX = { "IX", 9};
 static const roman_numeral_t ROMAN_NUMERAL_V = { "V", 5};
 static const roman_numeral_t ROMAN_NUMERAL_I = { "I", 1};
 

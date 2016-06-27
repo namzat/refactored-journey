@@ -32,7 +32,9 @@ const int integer_to_numeral(const int number, char *numeral) {
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_C, numeral);
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_XC, numeral);
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_L, numeral);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_XL, numeral);
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_X, numeral);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_IX, numeral);
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_V, numeral);
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_I, numeral);
 
