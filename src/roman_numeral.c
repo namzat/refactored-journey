@@ -29,7 +29,7 @@ static const int extract_roman_numeral(const int initial_value, roman_numeral_t 
     int remainder = initial_value;
     int multiplier = 0;
 
-    if(NULL == resultant_numeral) return -1;
+    if(NULL == resultant_numeral) return STATUS_FAIL;
 
     multiplier = remainder / conversion_numeral.value;
     for(int i = 0; i < multiplier; ++i) {
@@ -41,7 +41,7 @@ static const int extract_roman_numeral(const int initial_value, roman_numeral_t 
 }
 
 const int integer_to_numeral(const int number, char *numeral) {
-    if(NULL == numeral) return -1;
+    if(NULL == numeral) return STATUS_FAIL;
 
     int remainder = 0;
     
@@ -60,12 +60,12 @@ const int integer_to_numeral(const int number, char *numeral) {
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_IV, numeral);
     remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_I, numeral);
 
-    return remainder;
+    return STATUS_SUCCESS;
 }
 
 static int numeral_has_invalid_characters(const char *numeral) {
     regex_t regex;
-    int returnval = 0;
+    int status = STATUS_SUCCESS;
     
     /*
         Regex patterns used:
@@ -77,15 +77,15 @@ static int numeral_has_invalid_characters(const char *numeral) {
     
     if (regcomp(&regex, pattern, REG_EXTENDED)) { // make sure regex compilation worked
         printf("regex failed");
-        returnval = 1;
+        status = STATUS_FAIL;
     }
     else if(regexec(&regex, numeral, 0, NULL, 0) == 0) { // look for a match
-        returnval = 1;
+        status = STATUS_FAIL;
     }
 
     regfree(&regex);
 
-    return returnval;
+    return status;
 }
 
 static int sum_numeral_parts(int numeral_part_values[], int numeral_part_values_array_length) {
@@ -148,7 +148,7 @@ const int numeral_to_integer(const char * numeral) {
                 numeral_part_values[i] = 1;
                 break;
             default:
-                return -1;
+                return STATUS_FAIL;
         }
     }
 

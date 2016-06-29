@@ -4,11 +4,10 @@
 #include "../src/roman_numeral.h"
 
 void assert_int_to_roman_conversion(const int integer, const char *expected_numeral) {
-    char *result = calloc(strlen(expected_numeral) ,sizeof(char));
+    char result[MAX_NUMERAL_SIZE] = {'\0'};
     int status = integer_to_numeral(integer, result);
-    ck_assert_int_eq(0, status);
+    ck_assert_int_eq(STATUS_SUCCESS, status);
     ck_assert_str_eq(expected_numeral, result);
-    free(result);
 }
 
 START_TEST(convert_I_to_1) {
