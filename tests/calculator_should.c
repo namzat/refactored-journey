@@ -1,13 +1,21 @@
+#include "../src/common.h"
+#include "../src/calculator.h"
 #include <stdio.h>
 #include "calculator_should.h"
-#include "../src/calculator.h"
+
 
 START_TEST(calculate_I_plus_I_as_II) {
-    ck_assert_str_eq(add("I", "I"), "II");
+    char roman_total[MAX_NUMERAL_SIZE] = {'\0'};
+    int status = add("I", "I", roman_total);
+    ck_assert_int_eq(STATUS_SUCCESS, status);
+    ck_assert_str_eq("II", roman_total);
 } END_TEST
 
 START_TEST(calculate_I_plus_II_as_III) {
-    ck_assert_str_eq(add("I", "II"), "III");
+    char roman_total[MAX_NUMERAL_SIZE] = {'\0'};
+    int status = add("I", "II", roman_total);
+    ck_assert_int_eq(STATUS_SUCCESS, status);
+    ck_assert_str_eq("III", roman_total);
 } END_TEST
 
 Suite * calculator_suite(void) {

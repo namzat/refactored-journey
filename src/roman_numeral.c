@@ -1,8 +1,10 @@
 #include "roman_numeral.h"
+#include "common.h"
 #include <bsd/string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <regex.h>
+#include <stdbool.h>
 
 #define MAX_COMPARE_ROMAN_NUMERAL_SIZE 2
 
@@ -40,32 +42,32 @@ static const int extract_roman_numeral(const int initial_value, roman_numeral_t 
     return remainder;
 }
 
-const int integer_to_numeral(const int number, char *numeral) {
-    if(NULL == numeral) return STATUS_FAIL;
-
+const int arabic_to_roman(const int number, char *roman) {
+    if(NULL == roman) return STATUS_FAIL;
+    
     int remainder = 0;
     
-    remainder = extract_roman_numeral(number, ROMAN_NUMERAL_M, numeral);
+    remainder = extract_roman_numeral(number, ROMAN_NUMERAL_M, roman);
 
-    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_CM, numeral);
-    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_D, numeral);
-    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_CD, numeral);
-    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_C, numeral);
-    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_XC, numeral);
-    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_L, numeral);
-    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_XL, numeral);
-    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_X, numeral);
-    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_IX, numeral);
-    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_V, numeral);
-    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_IV, numeral);
-    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_I, numeral);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_CM, roman);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_D, roman);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_CD, roman);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_C, roman);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_XC, roman);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_L, roman);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_XL, roman);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_X, roman);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_IX, roman);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_V, roman);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_IV, roman);
+    remainder = extract_roman_numeral(remainder, ROMAN_NUMERAL_I, roman);
 
     return STATUS_SUCCESS;
 }
 
-static int numeral_has_invalid_characters(const char *numeral) {
+static bool roman_numeral_is_invalid(const char *numeral) {
     regex_t regex;
-    int status = STATUS_SUCCESS;
+    bool status = false;
     
     /*
         Regex patterns used:
@@ -77,10 +79,10 @@ static int numeral_has_invalid_characters(const char *numeral) {
     
     if (regcomp(&regex, pattern, REG_EXTENDED)) { // make sure regex compilation worked
         printf("regex failed");
-        status = STATUS_FAIL;
+        status = true;
     }
     else if(regexec(&regex, numeral, 0, NULL, 0) == 0) { // look for a match
-        status = STATUS_FAIL;
+        status = true;
     }
 
     regfree(&regex);
@@ -88,19 +90,19 @@ static int numeral_has_invalid_characters(const char *numeral) {
     return status;
 }
 
-static int sum_numeral_parts(int numeral_part_values[], int numeral_part_values_array_length) {
+static int sum_numeral_parts(int roman_numeral_part_values[], int roman_numeral_part_values_array_length) {
     int totalvalue = 0;
     int next_character_index = 0;
     int current_character_value = 0;
     int next_character_value = 0;
 
-    for(int char_index = 0; char_index < numeral_part_values_array_length; ++char_index) 
+    for(int char_index = 0; char_index < roman_numeral_part_values_array_length; ++char_index) 
     {
         next_character_index = char_index + 1;
-        current_character_value = numeral_part_values[char_index];
-        next_character_value = numeral_part_values[next_character_index];
+        current_character_value = roman_numeral_part_values[char_index];
+        next_character_value = roman_numeral_part_values[next_character_index];
 
-        if((next_character_index < numeral_part_values_array_length) && (next_character_value > current_character_value))
+        if((next_character_index < roman_numeral_part_values_array_length) && (next_character_value > current_character_value))
         {
             totalvalue += next_character_value - current_character_value;
             char_index++;
@@ -114,45 +116,45 @@ static int sum_numeral_parts(int numeral_part_values[], int numeral_part_values_
     return totalvalue; 
 }
 
-const int numeral_to_integer(const char * numeral) {
-    const int values_array_length = strlen(numeral);
+const int roman_to_arabic(const char * roman) {
+    const int values_array_length = strlen(roman);
 
-    if(NULL == numeral) return -1;
-    if(0 == values_array_length) return -1;
-    if(numeral_has_invalid_characters(numeral)) return -1;
+    if(NULL == roman) return 0;
+    if(0 == values_array_length) return 0;
+    if(roman_numeral_is_invalid(roman)) return 0;
     
-    int numeral_part_values[values_array_length];
+    int roman_numeral_part_values[values_array_length];
     int totalValue = 0;
 
     for(int i = 0; i < values_array_length; ++i) {
-        switch(numeral[i]) {
+        switch(roman[i]) {
             case 'M':
-                numeral_part_values[i] = 1000;
+                roman_numeral_part_values[i] = ROMAN_NUMERAL_M.value;
                 break;
             case 'D':
-                numeral_part_values[i] = 500;
+                roman_numeral_part_values[i] = ROMAN_NUMERAL_D.value;
                 break;
             case 'C':
-                numeral_part_values[i] = 100;
+                roman_numeral_part_values[i] = ROMAN_NUMERAL_C.value;
                 break;
             case 'L':
-                numeral_part_values[i] = 50;
+                roman_numeral_part_values[i] = ROMAN_NUMERAL_L.value;
                 break;
             case 'X':
-                numeral_part_values[i] = 10;
+                roman_numeral_part_values[i] = ROMAN_NUMERAL_X.value;
                 break;
             case 'V': 
-                numeral_part_values[i] = 5;
+                roman_numeral_part_values[i] = ROMAN_NUMERAL_V.value;
                 break;
             case 'I':
-                numeral_part_values[i] = 1;
+                roman_numeral_part_values[i] = ROMAN_NUMERAL_I.value;
                 break;
             default:
                 return STATUS_FAIL;
         }
     }
 
-    totalValue = sum_numeral_parts(numeral_part_values, values_array_length);
+    totalValue = sum_numeral_parts(roman_numeral_part_values, values_array_length);
 
     return totalValue;
 }

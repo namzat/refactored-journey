@@ -1,29 +1,26 @@
 #include "calculator.h"
 #include "roman_numeral.h"
+#include "common.h"
 #include <bsd/string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-const char * add(const char *operand1, const char *operand2) {
-    int operand1value = 0;
-    int operand2value = 0;
-    int total = 0;
-    char *numeraltotal = calloc(MAX_NUMERAL_SIZE + NULL_TERMINATOR_SIZE, sizeof(char));
-    char *returnvalue = 0;
+const int add(const char *operand1, const char *operand2, char *total) {
+    if (NULL == total) return STATUS_FAIL;
 
-    operand1value = numeral_to_integer(operand1);
-    operand2value = numeral_to_integer(operand2);
-        
-    total = operand1value + operand2value;
+    int operand1_arabic_value = 0;
+    int operand2_arabic_value = 0;
+    int arabic_total = 0;
+    char roman_total[MAX_NUMERAL_SIZE] = {'\0'};
 
-    int status = integer_to_numeral(total, numeraltotal);  
-    if(status == 0) {
+    operand1_arabic_value = roman_to_arabic(operand1);
+    operand2_arabic_value = roman_to_arabic(operand2);
         
-        returnvalue = strdup(numeraltotal);
-        free(numeraltotal);
-        return returnvalue;
-    }
-    else {
-        return "An error occured";
-    }     
+    arabic_total = operand1_arabic_value + operand2_arabic_value;
+
+    int status = arabic_to_roman(arabic_total, roman_total);  
+
+    strlcat(total, roman_total, sizeof(total));
+    
+    return status;
 }

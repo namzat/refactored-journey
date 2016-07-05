@@ -1,215 +1,216 @@
+#include "../src/common.h"
+#include "../src/roman_numeral.h"
+#include "roman_numeral_should.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "roman_numeral_should.h"
-#include "../src/roman_numeral.h"
 
-void assert_int_to_roman_conversion(const int integer, const char *expected_numeral) {
+static void assert_arabic_to_roman_conversion(const int arabic, const char *expected_numeral) {
     char result[MAX_NUMERAL_SIZE] = {'\0'};
-    int status = integer_to_numeral(integer, result);
+    int status = arabic_to_roman(arabic, result);
     ck_assert_int_eq(STATUS_SUCCESS, status);
     ck_assert_str_eq(expected_numeral, result);
 }
 
 START_TEST(convert_I_to_1) {
-    ck_assert_int_eq(numeral_to_integer("I"), 1);
+    ck_assert_int_eq(roman_to_arabic("I"), 1);
 } END_TEST
 
 START_TEST(convert_II_to_2) {
-    ck_assert_int_eq(numeral_to_integer("II"), 2);
+    ck_assert_int_eq(roman_to_arabic("II"), 2);
 } END_TEST
 
 START_TEST(convert_III_to_3) {
-    ck_assert_int_eq(numeral_to_integer("III"), 3);
+    ck_assert_int_eq(roman_to_arabic("III"), 3);
 } END_TEST
 
 START_TEST(convert_V_to_5) {
-    ck_assert_int_eq(numeral_to_integer("V"), 5);
+    ck_assert_int_eq(roman_to_arabic("V"), 5);
 } END_TEST
 
 START_TEST(convert_IV_to_4) {
-    ck_assert_int_eq(numeral_to_integer("IV"), 4);
+    ck_assert_int_eq(roman_to_arabic("IV"), 4);
 } END_TEST
 
 START_TEST(convert_IX_to_9) {
-    ck_assert_int_eq(numeral_to_integer("IX"), 9);
+    ck_assert_int_eq(roman_to_arabic("IX"), 9);
 } END_TEST
 
 START_TEST(convert_X_to_10) {
-    ck_assert_int_eq(numeral_to_integer("X"), 10);
+    ck_assert_int_eq(roman_to_arabic("X"), 10);
 } END_TEST
 
 START_TEST(convert_XX_to_20) {
-    ck_assert_int_eq(numeral_to_integer("XX"), 20);
+    ck_assert_int_eq(roman_to_arabic("XX"), 20);
 } END_TEST
 
 START_TEST(convert_XXX_to_30) {
-    ck_assert_int_eq(numeral_to_integer("XXX"), 30);
+    ck_assert_int_eq(roman_to_arabic("XXX"), 30);
 } END_TEST
 
 START_TEST(convert_L_to_50) {
-    ck_assert_int_eq(numeral_to_integer("L"), 50);
+    ck_assert_int_eq(roman_to_arabic("L"), 50);
 } END_TEST
 
 START_TEST(convert_XL_to_40) {
-    ck_assert_int_eq(numeral_to_integer("XL"), 40);
+    ck_assert_int_eq(roman_to_arabic("XL"), 40);
 } END_TEST
 
 START_TEST(convert_C_to_100) {
-    ck_assert_int_eq(numeral_to_integer("C"), 100);
+    ck_assert_int_eq(roman_to_arabic("C"), 100);
 } END_TEST
 
 START_TEST(convert_CC_to_200) {
-    ck_assert_int_eq(numeral_to_integer("CC"), 200);
+    ck_assert_int_eq(roman_to_arabic("CC"), 200);
 } END_TEST
 
 START_TEST(convert_CCC_to_300) {
-    ck_assert_int_eq(numeral_to_integer("CCC"), 300);
+    ck_assert_int_eq(roman_to_arabic("CCC"), 300);
 } END_TEST
 
 START_TEST(convert_XC_to_90) {
-    ck_assert_int_eq(numeral_to_integer("XC"), 90);
+    ck_assert_int_eq(roman_to_arabic("XC"), 90);
 } END_TEST
 
 START_TEST(convert_D_to_500) {
-    ck_assert_int_eq(numeral_to_integer("D"), 500);
+    ck_assert_int_eq(roman_to_arabic("D"), 500);
 } END_TEST
 
 START_TEST(convert_CD_to_400) {
-    ck_assert_int_eq(numeral_to_integer("CD"), 400);
+    ck_assert_int_eq(roman_to_arabic("CD"), 400);
 } END_TEST
 
 START_TEST(convert_M_to_1000) {
-    ck_assert_int_eq(numeral_to_integer("M"), 1000);
+    ck_assert_int_eq(roman_to_arabic("M"), 1000);
 } END_TEST
 
 START_TEST(convert_MM_to_2000) {
-    ck_assert_int_eq(numeral_to_integer("MM"), 2000);
+    ck_assert_int_eq(roman_to_arabic("MM"), 2000);
 } END_TEST
 
 START_TEST(convert_MMM_to_3000) {
-    ck_assert_int_eq(numeral_to_integer("MMM"), 3000);
+    ck_assert_int_eq(roman_to_arabic("MMM"), 3000);
 } END_TEST
 
 START_TEST(convert_CMXCIX_to_999) {
-    ck_assert_int_eq(numeral_to_integer("CMXCIX"), 999);
+    ck_assert_int_eq(roman_to_arabic("CMXCIX"), 999);
 } END_TEST
 
 START_TEST(convert_XLIX_to_49) {
-    ck_assert_int_eq(numeral_to_integer("XLIX"), 49);
+    ck_assert_int_eq(roman_to_arabic("XLIX"), 49);
 } END_TEST
 
 START_TEST(convert_3000_to_MMM) {
-    assert_int_to_roman_conversion(3000, "MMM");
+    assert_arabic_to_roman_conversion(3000, "MMM");
 } END_TEST
 
 START_TEST(convert_2000_to_MM) {
-    assert_int_to_roman_conversion(2000, "MM");
+    assert_arabic_to_roman_conversion(2000, "MM");
 } END_TEST
 
 START_TEST(convert_1000_to_M) {
-    assert_int_to_roman_conversion(1000, "M");
+    assert_arabic_to_roman_conversion(1000, "M");
 } END_TEST
 
 START_TEST(convert_900_to_CM) {
-    assert_int_to_roman_conversion(900, "CM");
+    assert_arabic_to_roman_conversion(900, "CM");
 } END_TEST
 
 START_TEST(convert_500_to_D) {
-    assert_int_to_roman_conversion(500, "D");
+    assert_arabic_to_roman_conversion(500, "D");
 } END_TEST
 
 START_TEST(convert_400_to_CD) {
-    assert_int_to_roman_conversion(400, "CD");
+    assert_arabic_to_roman_conversion(400, "CD");
 } END_TEST
 
 START_TEST(convert_300_to_CCC) {
-    assert_int_to_roman_conversion(300, "CCC");
+    assert_arabic_to_roman_conversion(300, "CCC");
 } END_TEST
 
 START_TEST(convert_200_to_CC) {
-    assert_int_to_roman_conversion(200, "CC");
+    assert_arabic_to_roman_conversion(200, "CC");
 } END_TEST
 
 START_TEST(convert_100_to_C) {
-    assert_int_to_roman_conversion(100, "C");
+    assert_arabic_to_roman_conversion(100, "C");
 } END_TEST
 
 START_TEST(convert_90_to_XC) {
-    assert_int_to_roman_conversion(90, "XC");
+    assert_arabic_to_roman_conversion(90, "XC");
 } END_TEST
 
 START_TEST(convert_50_to_L) {
-    assert_int_to_roman_conversion(50, "L");
+    assert_arabic_to_roman_conversion(50, "L");
 } END_TEST
 
 START_TEST(convert_40_to_XL) {
-    assert_int_to_roman_conversion(40, "XL");
+    assert_arabic_to_roman_conversion(40, "XL");
 } END_TEST
 
 START_TEST(convert_30_to_XXX) {
-    assert_int_to_roman_conversion(30, "XXX");
+    assert_arabic_to_roman_conversion(30, "XXX");
 } END_TEST
 
 START_TEST(convert_20_to_XX) {
-    assert_int_to_roman_conversion(20, "XX");
+    assert_arabic_to_roman_conversion(20, "XX");
 } END_TEST
 
 START_TEST(convert_10_to_X) {
-    assert_int_to_roman_conversion(10, "X");
+    assert_arabic_to_roman_conversion(10, "X");
 } END_TEST
 
 START_TEST(convert_9_to_IX) {
-    assert_int_to_roman_conversion(9, "IX");
+    assert_arabic_to_roman_conversion(9, "IX");
 } END_TEST
 
 START_TEST(convert_5_to_V) {
-    assert_int_to_roman_conversion(5, "V");
+    assert_arabic_to_roman_conversion(5, "V");
 } END_TEST
 
 START_TEST(convert_4_to_IV) {
-    assert_int_to_roman_conversion(4, "IV");
+    assert_arabic_to_roman_conversion(4, "IV");
 } END_TEST
 
 START_TEST(convert_3_to_III) {
-    assert_int_to_roman_conversion(3, "III");
+    assert_arabic_to_roman_conversion(3, "III");
 } END_TEST
 
 START_TEST(convert_2_to_II) {
-    assert_int_to_roman_conversion(2, "II");
+    assert_arabic_to_roman_conversion(2, "II");
 } END_TEST
 
 START_TEST(convert_1_to_I) {
-    assert_int_to_roman_conversion(1, "I");
+    assert_arabic_to_roman_conversion(1, "I");
 } END_TEST
 
 START_TEST(reject_invalid_character_patterns) {
-    ck_assert_int_eq(-1,numeral_to_integer(""));
-    ck_assert_int_eq(-1,numeral_to_integer("MMMM"));
-    ck_assert_int_eq(-1,numeral_to_integer("IIII"));
-    ck_assert_int_eq(-1,numeral_to_integer("VV"));
-    ck_assert_int_eq(-1,numeral_to_integer("XXXX"));
-    ck_assert_int_eq(-1,numeral_to_integer("LL"));
-    ck_assert_int_eq(-1,numeral_to_integer("CCCC"));
-    ck_assert_int_eq(-1,numeral_to_integer("DD"));
-    ck_assert_int_eq(-1,numeral_to_integer("MMMM"));
-    ck_assert_int_eq(-1,numeral_to_integer("1"));
-    ck_assert_int_eq(-1,numeral_to_integer("a"));
-    ck_assert_int_eq(-1,numeral_to_integer("A"));
-    ck_assert_int_eq(-1,numeral_to_integer("IIIV"));
-    ck_assert_int_eq(-1,numeral_to_integer("VX"));
-    ck_assert_int_eq(-1,numeral_to_integer("VL"));
-    ck_assert_int_eq(-1,numeral_to_integer("VC"));
-    ck_assert_int_eq(-1,numeral_to_integer("VM"));
-    ck_assert_int_eq(-1,numeral_to_integer("XXL"));
-    ck_assert_int_eq(-1,numeral_to_integer("XXC"));
-    ck_assert_int_eq(-1,numeral_to_integer("XXD"));
-    ck_assert_int_eq(-1,numeral_to_integer("XXM"));
-    ck_assert_int_eq(-1,numeral_to_integer("LC"));
-    ck_assert_int_eq(-1,numeral_to_integer("LD"));
-    ck_assert_int_eq(-1,numeral_to_integer("LM"));
-    ck_assert_int_eq(-1,numeral_to_integer("CCD"));
-    ck_assert_int_eq(-1,numeral_to_integer("CCM"));
-    ck_assert_int_eq(-1,numeral_to_integer("DM"));
+    ck_assert_int_eq(0,roman_to_arabic(""));
+    ck_assert_int_eq(0,roman_to_arabic("MMMM"));
+    ck_assert_int_eq(0,roman_to_arabic("IIII"));
+    ck_assert_int_eq(0,roman_to_arabic("VV"));
+    ck_assert_int_eq(0,roman_to_arabic("XXXX"));
+    ck_assert_int_eq(0,roman_to_arabic("LL"));
+    ck_assert_int_eq(0,roman_to_arabic("CCCC"));
+    ck_assert_int_eq(0,roman_to_arabic("DD"));
+    ck_assert_int_eq(0,roman_to_arabic("MMMM"));
+    ck_assert_int_eq(0,roman_to_arabic("1"));
+    ck_assert_int_eq(0,roman_to_arabic("a"));
+    ck_assert_int_eq(0,roman_to_arabic("A"));
+    ck_assert_int_eq(0,roman_to_arabic("IIIV"));
+    ck_assert_int_eq(0,roman_to_arabic("VX"));
+    ck_assert_int_eq(0,roman_to_arabic("VL"));
+    ck_assert_int_eq(0,roman_to_arabic("VC"));
+    ck_assert_int_eq(0,roman_to_arabic("VM"));
+    ck_assert_int_eq(0,roman_to_arabic("XXL"));
+    ck_assert_int_eq(0,roman_to_arabic("XXC"));
+    ck_assert_int_eq(0,roman_to_arabic("XXD"));
+    ck_assert_int_eq(0,roman_to_arabic("XXM"));
+    ck_assert_int_eq(0,roman_to_arabic("LC"));
+    ck_assert_int_eq(0,roman_to_arabic("LD"));
+    ck_assert_int_eq(0,roman_to_arabic("LM"));
+    ck_assert_int_eq(0,roman_to_arabic("CCD"));
+    ck_assert_int_eq(0,roman_to_arabic("CCM"));
+    ck_assert_int_eq(0,roman_to_arabic("DM"));
 } END_TEST
 
 
