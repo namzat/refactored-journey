@@ -27,6 +27,13 @@ START_TEST(return_status_error_if_passed_null_value) {
     ck_assert_int_eq(EXIT_FAILURE, add(null_argument, "I", "I"));
 } END_TEST
 
+START_TEST(calculate_V_minus_I_as_IV) {
+    char roman_total[MAX_ROMAN_NUMERAL_STRING_SIZE] = {'0'};
+    ck_assert_int_eq(EXIT_SUCCESS, subtract(roman_total, "V", "I"));
+    ck_assert_str_eq("IV", roman_total);
+} END_TEST
+
+
 Suite * calculator_suite(void) {
     Suite *s;
     TCase *tc_core;
@@ -39,6 +46,7 @@ Suite * calculator_suite(void) {
     tcase_add_test(tc_core, calculate_I_plus_I_as_II);
     tcase_add_test(tc_core, calculate_I_plus_II_as_III);
     tcase_add_test(tc_core, return_status_error_if_passed_null_value);
+    tcase_add_test(tc_core, calculate_V_minus_I_as_IV);
 
     suite_add_tcase(s, tc_core);
 

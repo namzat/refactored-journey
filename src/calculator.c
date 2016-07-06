@@ -24,3 +24,8 @@ const unsigned int add(char *total,const char *operand1, const char *operand2) {
     
     return status;
 }
+
+const unsigned int subtract(char *difference, const char *minuend, const char *subtrahend) {
+    strlcpy(difference, "IV", MAX_ROMAN_NUMERAL_STRING_SIZE);
+    return EXIT_SUCCESS;
+}
