@@ -26,6 +26,7 @@ const unsigned int add(char *total,const char *operand1, const char *operand2) {
 }
 
 const unsigned int subtract(char *difference, const char *minuend, const char *subtrahend) {
+    if((NULL == minuend)) return EXIT_FAILURE;
 
     int minuend_arabic_value = 0;
     int subtrahend_arabic_value = 0;
