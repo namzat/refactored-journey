@@ -35,6 +35,8 @@ const unsigned int subtract(char *difference, const char *minuend, const char *s
     minuend_arabic_value = roman_to_arabic(minuend);
     subtrahend_arabic_value = roman_to_arabic(subtrahend);
 
+    if(minuend < subtrahend) return EXIT_FAILURE;
+
     arabic_difference = minuend_arabic_value - subtrahend_arabic_value;
 
     int status = arabic_to_roman(difference, arabic_difference);
