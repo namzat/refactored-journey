@@ -26,6 +26,17 @@ const unsigned int add(char *total,const char *operand1, const char *operand2) {
 }
 
 const unsigned int subtract(char *difference, const char *minuend, const char *subtrahend) {
-    strlcpy(difference, "IV", MAX_ROMAN_NUMERAL_STRING_SIZE);
-    return EXIT_SUCCESS;
+
+    int minuend_arabic_value = 0;
+    int subtrahend_arabic_value = 0;
+    int arabic_difference = 0;
+
+    minuend_arabic_value = roman_to_arabic(minuend);
+    subtrahend_arabic_value = roman_to_arabic(subtrahend);
+
+    arabic_difference = minuend_arabic_value - subtrahend_arabic_value;
+
+    int status = arabic_to_roman(difference, arabic_difference);
+    
+    return status;
 }

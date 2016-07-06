@@ -28,13 +28,13 @@ START_TEST(return_status_error_if_passed_null_value) {
 } END_TEST
 
 START_TEST(calculate_V_minus_I_as_IV) {
-    char roman_total[MAX_ROMAN_NUMERAL_STRING_SIZE] = {'0'};
+    char roman_total[MAX_ROMAN_NUMERAL_STRING_SIZE] = {'\0'};
     ck_assert_int_eq(EXIT_SUCCESS, subtract(roman_total, "V", "I"));
     ck_assert_str_eq("IV", roman_total);
 } END_TEST
 
 START_TEST(calculate_X_minus_II_as_VIII) {
-    char roman_total[MAX_ROMAN_NUMERAL_STRING_SIZE] = {'0'};
+    char roman_total[MAX_ROMAN_NUMERAL_STRING_SIZE] = {'\0'};
     ck_assert_int_eq(EXIT_SUCCESS, subtract(roman_total, "X", "II"));
     ck_assert_str_eq("VIII", roman_total);
 } END_TEST
