@@ -31,6 +31,11 @@ START_TEST(calculate_X_minus_II_as_VIII) {
     ck_assert_str_eq("VIII", roman_total);
 } END_TEST
 
+START_TEST(minuend_larger_than_subtrahend_fails_no_negatives_in_roman) {
+    char roman_total[MAX_ROMAN_NUMERAL_STRING_SIZE] = {'\0'};
+    ck_assert_int_eq(EXIT_FAILURE, subtract(roman_total, "I", "IX"));
+} END_TEST
+
 START_TEST(return_status_error_if_passed_null_value) {
     char *null_argument = 0;
     char roman_total[MAX_ROMAN_NUMERAL_STRING_SIZE];
@@ -57,6 +62,7 @@ Suite * calculator_suite(void) {
     tcase_add_test(tc_core, return_status_error_if_passed_null_value);
     tcase_add_test(tc_core, calculate_V_minus_I_as_IV);
     tcase_add_test(tc_core, calculate_X_minus_II_as_VIII);
+    tcase_add_test(tc_core, minuend_larger_than_subtrahend_fails_no_negatives_in_roman);
 
     suite_add_tcase(s, tc_core);
 
