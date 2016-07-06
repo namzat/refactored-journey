@@ -28,13 +28,13 @@ static const roman_numeral_t roman_numeral_V  =  { "V" , 5 };
 static const roman_numeral_t roman_numeral_IV =  { "IV", 4 };
 static const roman_numeral_t roman_numeral_I  =  { "I" , 1 };
 
-static const unsigned int extract_roman_numeral(char* resultant_numeral_out, const unsigned int initial_value, roman_numeral_t numeral_to_extract) {
+static const unsigned int concat_roman_numeral(char* resultant_numeral_out, const unsigned int initial_value, roman_numeral_t numeral_to_extract) {
     unsigned int remainder = initial_value;
     int multiplier = 0;
 
     multiplier = remainder / numeral_to_extract.value;
     for(int i = 0; i < multiplier; ++i) {
-        strlcat(resultant_numeral_out ,numeral_to_extract.character, sizeof(resultant_numeral_out));
+        strlcat(resultant_numeral_out ,numeral_to_extract.character, MAX_ROMAN_NUMERAL_STRING_SIZE);
         remainder -= numeral_to_extract.value;
     }
 
@@ -46,19 +46,19 @@ const int arabic_to_roman(char *roman_out, const unsigned int number) {
     
     int remainder = 0;
     
-    remainder = extract_roman_numeral(roman_out, number,    roman_numeral_M);
-    remainder = extract_roman_numeral(roman_out, remainder, roman_numeral_CM);
-    remainder = extract_roman_numeral(roman_out, remainder, roman_numeral_D);
-    remainder = extract_roman_numeral(roman_out, remainder, roman_numeral_CD);
-    remainder = extract_roman_numeral(roman_out, remainder, roman_numeral_C);
-    remainder = extract_roman_numeral(roman_out, remainder, roman_numeral_XC);
-    remainder = extract_roman_numeral(roman_out, remainder, roman_numeral_L);
-    remainder = extract_roman_numeral(roman_out, remainder, roman_numeral_XL);
-    remainder = extract_roman_numeral(roman_out, remainder, roman_numeral_X);
-    remainder = extract_roman_numeral(roman_out, remainder, roman_numeral_IX);
-    remainder = extract_roman_numeral(roman_out, remainder, roman_numeral_V);
-    remainder = extract_roman_numeral(roman_out, remainder, roman_numeral_IV);
-    remainder = extract_roman_numeral(roman_out, remainder, roman_numeral_I);
+    remainder = concat_roman_numeral(roman_out, number,    roman_numeral_M);
+    remainder = concat_roman_numeral(roman_out, remainder, roman_numeral_CM);
+    remainder = concat_roman_numeral(roman_out, remainder, roman_numeral_D);
+    remainder = concat_roman_numeral(roman_out, remainder, roman_numeral_CD);
+    remainder = concat_roman_numeral(roman_out, remainder, roman_numeral_C);
+    remainder = concat_roman_numeral(roman_out, remainder, roman_numeral_XC);
+    remainder = concat_roman_numeral(roman_out, remainder, roman_numeral_L);
+    remainder = concat_roman_numeral(roman_out, remainder, roman_numeral_XL);
+    remainder = concat_roman_numeral(roman_out, remainder, roman_numeral_X);
+    remainder = concat_roman_numeral(roman_out, remainder, roman_numeral_IX);
+    remainder = concat_roman_numeral(roman_out, remainder, roman_numeral_V);
+    remainder = concat_roman_numeral(roman_out, remainder, roman_numeral_IV);
+    remainder = concat_roman_numeral(roman_out, remainder, roman_numeral_I);
 
     return remainder;
 }
