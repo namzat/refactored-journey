@@ -5,22 +5,22 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-const int add(const char *operand1, const char *operand2, char *total) {
-    if (NULL == total) return STATUS_FAIL;
+const unsigned int add(char *total,const char *operand1, const char *operand2) {
+    if ((NULL == operand1) || (NULL == operand2) || (NULL == total)) return EXIT_FAILURE;
 
     int operand1_arabic_value = 0;
     int operand2_arabic_value = 0;
     int arabic_total = 0;
-    char roman_total[MAX_NUMERAL_SIZE] = {'\0'};
+    char roman_total[MAX_ROMAN_NUMERAL_STRING_SIZE] = {'\0'};
 
     operand1_arabic_value = roman_to_arabic(operand1);
     operand2_arabic_value = roman_to_arabic(operand2);
         
     arabic_total = operand1_arabic_value + operand2_arabic_value;
 
-    int status = arabic_to_roman(arabic_total, roman_total);  
+    int status = arabic_to_roman(roman_total, arabic_total); 
 
-    strlcat(total, roman_total, sizeof(total));
+    strlcpy(total, roman_total, MAX_ROMAN_NUMERAL_STRING_SIZE);
     
     return status;
 }

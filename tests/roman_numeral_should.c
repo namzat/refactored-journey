@@ -5,9 +5,9 @@
 #include <stdlib.h>
 
 static void assert_arabic_to_roman_conversion(const int arabic, const char *expected_numeral) {
-    char result[MAX_NUMERAL_SIZE] = {'\0'};
-    int status = arabic_to_roman(arabic, result);
-    ck_assert_int_eq(STATUS_SUCCESS, status);
+    char result[MAX_ROMAN_NUMERAL_STRING_SIZE] = {'\0'};
+    int status = arabic_to_roman(result, arabic);
+    ck_assert_int_eq(EXIT_SUCCESS, status);
     ck_assert_str_eq(expected_numeral, result);
 }
 
@@ -99,6 +99,10 @@ START_TEST(convert_XLIX_to_49) {
     ck_assert_int_eq(roman_to_arabic("XLIX"), 49);
 } END_TEST
 
+START_TEST(handle_longest_roman_value_MMMDCCCLXXXVIII_to_3888) {
+    ck_assert_int_eq(roman_to_arabic("MMMDCCCLXXXVIII"), 3888);
+} END_TEST
+
 START_TEST(convert_3000_to_MMM) {
     assert_arabic_to_roman_conversion(3000, "MMM");
 } END_TEST
@@ -181,6 +185,10 @@ START_TEST(convert_2_to_II) {
 
 START_TEST(convert_1_to_I) {
     assert_arabic_to_roman_conversion(1, "I");
+} END_TEST
+
+START_TEST(handle_longest_roman_value_3888_to_MMMDCCCLXXXVIII) {
+    ck_assert_int_eq(roman_to_arabic("MMMDCCCLXXXVIII"), 3888);
 } END_TEST
 
 START_TEST(reject_invalid_character_patterns) {
@@ -267,6 +275,8 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_3_to_III);
     tcase_add_test(tc_core, convert_2_to_II);
     tcase_add_test(tc_core, convert_1_to_I);
+    tcase_add_test(tc_core, handle_longest_roman_value_3888_to_MMMDCCCLXXXVIII);
+    tcase_add_test(tc_core, handle_longest_roman_value_MMMDCCCLXXXVIII_to_3888);
     
 
     suite_add_tcase(s, tc_core);

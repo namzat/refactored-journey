@@ -1,21 +1,30 @@
 #include "../src/common.h"
 #include "../src/calculator.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include "calculator_should.h"
 
 
 START_TEST(calculate_I_plus_I_as_II) {
-    char roman_total[MAX_NUMERAL_SIZE] = {'\0'};
-    int status = add("I", "I", roman_total);
-    ck_assert_int_eq(STATUS_SUCCESS, status);
+    char roman_total[MAX_ROMAN_NUMERAL_STRING_SIZE] = {'\0'};
+    int status = add(roman_total, "I", "I");
+    ck_assert_int_eq(EXIT_SUCCESS, status);
     ck_assert_str_eq("II", roman_total);
 } END_TEST
 
 START_TEST(calculate_I_plus_II_as_III) {
-    char roman_total[MAX_NUMERAL_SIZE] = {'\0'};
-    int status = add("I", "II", roman_total);
-    ck_assert_int_eq(STATUS_SUCCESS, status);
+    char roman_total[MAX_ROMAN_NUMERAL_STRING_SIZE] = {'\0'};
+    int status = add(roman_total, "I", "II");
+    ck_assert_int_eq(EXIT_SUCCESS, status);
     ck_assert_str_eq("III", roman_total);
+} END_TEST
+
+START_TEST(return_status_error_if_passed_null_value) {
+    char *null_argument = 0;
+    char roman_total[MAX_ROMAN_NUMERAL_STRING_SIZE];
+    ck_assert_int_eq(EXIT_FAILURE, add(roman_total, null_argument, "I"));
+    ck_assert_int_eq(EXIT_FAILURE, add(roman_total, "I", null_argument));
+    ck_assert_int_eq(EXIT_FAILURE, add(null_argument, "I", "I"));
 } END_TEST
 
 Suite * calculator_suite(void) {
@@ -29,6 +38,7 @@ Suite * calculator_suite(void) {
 
     tcase_add_test(tc_core, calculate_I_plus_I_as_II);
     tcase_add_test(tc_core, calculate_I_plus_II_as_III);
+    tcase_add_test(tc_core, return_status_error_if_passed_null_value);
 
     suite_add_tcase(s, tc_core);
 

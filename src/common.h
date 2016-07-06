@@ -1,9 +1,6 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-#define MAX_NUMERAL_SIZE 16
-#define NULL_TERMINATOR_SIZE 1
-#define STATUS_FAIL -1
-#define STATUS_SUCCESS 0
+#define MAX_ROMAN_NUMERAL_STRING_SIZE 16
 
 #endif /* COMMON_H */
