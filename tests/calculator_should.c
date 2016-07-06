@@ -39,6 +39,7 @@ START_TEST(return_status_error_if_passed_null_value) {
     ck_assert_int_eq(EXIT_FAILURE, add(null_argument, "I", "I"));
 
     ck_assert_int_eq(EXIT_FAILURE, subtract(roman_total, null_argument, "I"));
+    ck_assert_int_eq(EXIT_FAILURE, subtract(roman_total, "I", null_argument));
 } END_TEST
 
 Suite * calculator_suite(void) {
