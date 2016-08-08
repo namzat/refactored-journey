@@ -72,8 +72,9 @@ static bool roman_numeral_is_invalid(const char *numeral) {
         [^IVXLCDM] - disallow characters that are not the roman numerals I,V,X,L,C,D,M
         I{4,}, V{2,}, X{4,}...etc. - disallow n or more characters in a row
         II[VXLCDM], V[XLCDM],...etc. - disallow larger numeral after smaller for non subtract cases
+        I[LCDM], X[DM] - disallow I before LCDM and X before DM
     */
-    const char *pattern = "[^IVXLCDM]|I{4,}|V{2,}|X{4,}|L{2,}|C{4,}|D{2,}|M{4,}|II[VXLCDM]|V[XLCDM]|XX[LCDM]|L[CDM]|CC[DM]|D[M]";
+    const char *pattern = "[^IVXLCDM]|I{4,}|V{2,}|X{4,}|L{2,}|C{4,}|D{2,}|M{4,}|II[VXLCDM]|V[XLCDM]|XX[LCDM]|L[CDM]|CC[DM]|D[M]|I[LCDM]|X[DM]";
     
     if (regcomp(&regex, pattern, REG_EXTENDED)) { // make sure regex compilation worked
         printf("regex failed");

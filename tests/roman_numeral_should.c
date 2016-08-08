@@ -219,6 +219,9 @@ START_TEST(reject_invalid_character_patterns) {
     ck_assert_int_eq(0,roman_to_arabic("CCD"));
     ck_assert_int_eq(0,roman_to_arabic("CCM"));
     ck_assert_int_eq(0,roman_to_arabic("DM"));
+    ck_assert_int_eq(0,roman_to_arabic(NULL));
+    ck_assert_int_eq(0,roman_to_arabic("IM"));
+    ck_assert_int_eq(0,roman_to_arabic("XM"));
 } END_TEST
 
 
