@@ -43,6 +43,7 @@ static const unsigned int concat_roman_numeral(char* resultant_numeral_out, cons
 
 const int arabic_to_roman(char *roman_out, const unsigned int number) {
     if(NULL == roman_out) return EXIT_FAILURE;
+    if(number < 1 || number > 3999) return EXIT_FAILURE;
     
     int remainder = 0;
     

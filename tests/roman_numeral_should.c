@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void assert_arabic_to_roman_conversion(const int arabic, const char *expected_numeral) {
+static void assert_arabic_to_roman_conversion(const int arabic, const char *expected_numeral, const int expected_status) {
     char result[MAX_ROMAN_NUMERAL_STRING_SIZE] = {'\0'};
     int status = arabic_to_roman(result, arabic);
-    ck_assert_int_eq(EXIT_SUCCESS, status);
+    ck_assert_int_eq(expected_status, status);
     ck_assert_str_eq(expected_numeral, result);
 }
 
@@ -103,88 +103,96 @@ START_TEST(handle_longest_roman_value_MMMDCCCLXXXVIII_to_3888) {
     ck_assert_int_eq(roman_to_arabic("MMMDCCCLXXXVIII"), 3888);
 } END_TEST
 
+START_TEST(reject_arabic_larger_than_3999) {
+    assert_arabic_to_roman_conversion(10000, "", EXIT_FAILURE);
+} END_TEST
+
+START_TEST(reject_arabic_smaller_than_1) {
+    assert_arabic_to_roman_conversion(0, "", EXIT_FAILURE);
+} END_TEST
+
 START_TEST(convert_3000_to_MMM) {
-    assert_arabic_to_roman_conversion(3000, "MMM");
+    assert_arabic_to_roman_conversion(3000, "MMM", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_2000_to_MM) {
-    assert_arabic_to_roman_conversion(2000, "MM");
+    assert_arabic_to_roman_conversion(2000, "MM", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_1000_to_M) {
-    assert_arabic_to_roman_conversion(1000, "M");
+    assert_arabic_to_roman_conversion(1000, "M", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_900_to_CM) {
-    assert_arabic_to_roman_conversion(900, "CM");
+    assert_arabic_to_roman_conversion(900, "CM", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_500_to_D) {
-    assert_arabic_to_roman_conversion(500, "D");
+    assert_arabic_to_roman_conversion(500, "D", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_400_to_CD) {
-    assert_arabic_to_roman_conversion(400, "CD");
+    assert_arabic_to_roman_conversion(400, "CD", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_300_to_CCC) {
-    assert_arabic_to_roman_conversion(300, "CCC");
+    assert_arabic_to_roman_conversion(300, "CCC", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_200_to_CC) {
-    assert_arabic_to_roman_conversion(200, "CC");
+    assert_arabic_to_roman_conversion(200, "CC", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_100_to_C) {
-    assert_arabic_to_roman_conversion(100, "C");
+    assert_arabic_to_roman_conversion(100, "C", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_90_to_XC) {
-    assert_arabic_to_roman_conversion(90, "XC");
+    assert_arabic_to_roman_conversion(90, "XC", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_50_to_L) {
-    assert_arabic_to_roman_conversion(50, "L");
+    assert_arabic_to_roman_conversion(50, "L", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_40_to_XL) {
-    assert_arabic_to_roman_conversion(40, "XL");
+    assert_arabic_to_roman_conversion(40, "XL", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_30_to_XXX) {
-    assert_arabic_to_roman_conversion(30, "XXX");
+    assert_arabic_to_roman_conversion(30, "XXX", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_20_to_XX) {
-    assert_arabic_to_roman_conversion(20, "XX");
+    assert_arabic_to_roman_conversion(20, "XX", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_10_to_X) {
-    assert_arabic_to_roman_conversion(10, "X");
+    assert_arabic_to_roman_conversion(10, "X", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_9_to_IX) {
-    assert_arabic_to_roman_conversion(9, "IX");
+    assert_arabic_to_roman_conversion(9, "IX", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_5_to_V) {
-    assert_arabic_to_roman_conversion(5, "V");
+    assert_arabic_to_roman_conversion(5, "V", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_4_to_IV) {
-    assert_arabic_to_roman_conversion(4, "IV");
+    assert_arabic_to_roman_conversion(4, "IV", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_3_to_III) {
-    assert_arabic_to_roman_conversion(3, "III");
+    assert_arabic_to_roman_conversion(3, "III", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_2_to_II) {
-    assert_arabic_to_roman_conversion(2, "II");
+    assert_arabic_to_roman_conversion(2, "II", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(convert_1_to_I) {
-    assert_arabic_to_roman_conversion(1, "I");
+    assert_arabic_to_roman_conversion(1, "I", EXIT_SUCCESS);
 } END_TEST
 
 START_TEST(handle_longest_roman_value_3888_to_MMMDCCCLXXXVIII) {
@@ -257,6 +265,8 @@ Suite * roman_numeral_suite(void) {
     tcase_add_test(tc_core, convert_CMXCIX_to_999);
     tcase_add_test(tc_core, convert_XLIX_to_49);
     tcase_add_test(tc_core, reject_invalid_character_patterns);
+    tcase_add_test(tc_core, reject_arabic_larger_than_3999);
+    tcase_add_test(tc_core, reject_arabic_smaller_than_1);
     tcase_add_test(tc_core, convert_3000_to_MMM);
     tcase_add_test(tc_core, convert_2000_to_MM);
     tcase_add_test(tc_core, convert_1000_to_M);
